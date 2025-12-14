@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sadek Development - Hlavní stránka</title>
+
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+    /* Sophisticated light background with subtle patterns */
+    body {
+      background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navigation */
+    nav {
+      transition: all 0.3s ease;
+    }
+    
+    .nav-scrolled {
+      background: rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Hero slider enhancement */
+    .hero-image {
+      will-change: transform;
+    }
+    
+    .hero-overlay {
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
+    }
+
+    /* Slider controls */
+    .slider-btn {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .slider-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.1);
+    }
+
+    /* Reveal animations */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Glass card for intro section */
+    .glass-intro {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Business area cards - Apple style with hover */
+    .business-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .business-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .business-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    .business-card:hover::before {
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%);
+    }
+    
+    .business-card img {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .business-card:hover img {
+      transform: scale(1.08);
+    }
+    
+    .business-card-content {
+      position: relative;
+      z-index: 2;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .business-card:hover .business-card-content {
+      transform: translateY(-4px);
+    }
+    
+    .business-card .accent-underline {
+      width: 16px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .business-card:hover .accent-underline {
+      width: 48px;
+    }
+
+    /* Project cards - Apple style */
+    .project-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+      position: relative;
+      background: white;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .project-card:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+    
+    .project-info-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .project-info-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .info-btn {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    
+    .info-btn:hover {
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+    }
+    
+    .info-btn:active {
+      transform: translateY(0);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    
+    .close-btn:hover {
+      background: rgba(0, 0, 0, 0.1);
+      transform: scale(1.1);
+    }
+
+    /* Language selector styling */
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    
+    .lang-dropdown {
+      z-index: 100;
+    }
+    
+    .lang-option {
+      font-size: 0.9rem;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f8f7f5;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ef4444, #dc2626);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #dc2626, #b91c1c);
+    }
+
+    /* Section title styling */
+    .section-title {
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      letter-spacing: -0.02em;
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .float-slow {
+      animation: float 8s ease-in-out infinite;
+    }
+
+    /* Status badge - Apple style */
+    .status-badge {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+
+<body class="text-gray-800 antialiased"
+      x-data="pageApp()"
+      @scroll.window="onScroll()">
+  
+  <!-- Navigation -->
+  <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
+    <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="h-20 flex items-center justify-between">
+          <a href="index.html" class="text-white font-bold text-xl tracking-tight">
+            Sadek Development
+          </a>
+
+          <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+            <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.about">
+            </a>
+            <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.business">
+            </a>
+            <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.projects">
+            </a>
+            <a href="#contact" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.contact">
+            </a>
+            <div class="relative" x-data="{ langOpen: false }">
+              <button @click="langOpen = !langOpen" 
+                      class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                </svg>
+                <span class="font-medium" x-text="currentLang.toUpperCase()"></span>
+                <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              
+              <div x-show="langOpen" 
+                   @click.away="langOpen = false"
+                   x-transition:enter="transition ease-out duration-200"
+                   x-transition:enter-start="opacity-0 scale-95"
+                   x-transition:enter-end="opacity-100 scale-100"
+                   x-transition:leave="transition ease-in duration-150"
+                   x-transition:leave-start="opacity-100 scale-100"
+                   x-transition:leave-end="opacity-0 scale-95"
+                   class="lang-dropdown absolute right-0 mt-3 w-40 origin-top-right"
+                   style="display: none;">
+                <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 py-2 overflow-hidden">
+                  <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false" 
+                     class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+                     :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                    <span class="text-2xl">🇨🇿</span>
+                    <span class="font-medium">Čeština</span>
+                  </a>
+                  <a href="#" @click.prevent="switchLanguage('en'); langOpen = false" 
+                     class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+                     :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                    <span class="text-2xl">🇬🇧</span>
+                    <span class="font-medium">English</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="md:hidden text-white">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Slider -->
+  <section class="pt-20 reveal" x-data="{
+      slides: [
+        'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&h=900&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&h=900&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1800&h=900&fit=crop&q=90'
+      ],
+      i: 0,
+      next(){ this.i = (this.i + 1) % this.slides.length },
+      prev(){ this.i = (this.i - 1 + this.slides.length) % this.slides.length }
+    }"
+    x-init="setInterval(() => next(), 6500)"
+  >
+    <div class="relative hero-wrapper h-[520px] md:h-[650px] overflow-hidden">
+      <template x-for="(s, idx) in slides" :key="idx">
+        <div x-show="i === idx"
+             x-transition:enter="transition-opacity ease-out duration-700"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition-opacity ease-in duration-500"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="absolute inset-0">
+          <img :src="s" alt="Hero" class="hero-image w-full h-full object-cover" />
+          <div class="hero-overlay absolute inset-0"></div>
+        </div>
+      </template>
+      
+      <!-- Slider Controls -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 z-10">
+        <button @click="prev()" class="slider-btn p-3 rounded-full" :aria-label="t.slider.prev">
+          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        
+        <div class="flex items-center gap-3">
+          <template x-for="(s, idx) in slides" :key="idx">
+            <button @click="i = idx"
+                    class="h-3 rounded-full border-2 border-white/70 transition-all duration-300"
+                    :class="i === idx ? 'w-12 bg-white' : 'w-3 bg-white/30 hover:bg-white/50'"
+                    :aria-label="t.slider.switchSlide">
+            </button>
+          </template>
+        </div>
+        
+        <button @click="next()" class="slider-btn p-3 rounded-full" :aria-label="t.slider.next">
+          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="py-20 sm:py-24 relative">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      <div class="reveal float-slow">
+        <div class="glass-intro p-10 md:p-14">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-gray-900 mb-8 text-center section-title" x-html="t.intro.title">
+          </h1>
+          
+          <div class="space-y-6 text-gray-700 leading-relaxed text-base md:text-lg">
+            <p x-text="t.intro.paragraph1"></p>
+            <p x-text="t.intro.paragraph2"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Areas -->
+  <section class="py-20 sm:py-24 relative">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title" x-text="t.businessAreas.title">
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+        <div class="reveal">
+          <a href="projekty.html" class="business-card block h-80 md:h-96">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=900&fit=crop&q=90" 
+                 alt="Výstavba nemovitostí" 
+                 class="w-full h-full object-cover">
+            <div class="business-card-content absolute bottom-0 left-0 right-0 p-8 md:p-10">
+              <h3 class="text-3xl md:text-4xl font-black text-white mb-3" x-text="t.businessAreas.construction">
+              </h3>
+              <div class="accent-underline h-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-full"></div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="reveal">
+          <a href="edukace-coaching.html" class="business-card block h-80 md:h-96">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=900&fit=crop&q=90" 
+                 alt="Edukace" 
+                 class="w-full h-full object-cover">
+            <div class="business-card-content absolute bottom-0 left-0 right-0 p-8 md:p-10">
+              <h3 class="text-3xl md:text-4xl font-black text-white mb-3" x-text="t.businessAreas.education">
+              </h3>
+              <div class="accent-underline h-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-full"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="py-20 sm:py-24 relative">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title" x-text="t.projects.title">
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-10">
+        <!-- Project 1 -->
+        <div class="reveal">
+          <div class="project-card bg-white" x-data="{showInfo: false}">
+            <div class="relative">
+              <span class="status-badge absolute top-4 left-4 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-900" x-text="t.projects.statusOngoing">
+              </span>
+              <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
+              </button>
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&h=900&fit=crop&q=90" 
+                     alt="Vila Kunice" 
+                     class="w-full h-64 md:h-72 object-cover">
+              </div>
+            </div>
+            <div class="p-6 text-center">
+              <p class="text-sm font-medium text-gray-700" x-text="t.projects.project1.location"></p>
+            </div>
+            
+            <!-- Info Overlay -->
+            <div class="project-info-overlay" :class="showInfo && 'active'">
+              <button @click.stop="showInfo = false" class="close-btn">
+                <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+              <div class="text-center space-y-4 max-w-xs" @click.stop>
+                <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project1.name"></h4>
+                <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project1.description"></p>
+                <div class="pt-3 space-y-1.5 text-sm text-gray-600">
+                  <p class="font-medium"><span x-text="t.projects.area"></span>: <span class="text-gray-900">250 m²</span></p>
+                  <p class="font-medium"><span x-text="t.projects.rooms"></span>: <span class="text-gray-900">5+1</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="reveal">
+          <div class="project-card bg-white" x-data="{showInfo: false}">
+            <div class="relative">
+              <span class="status-badge absolute top-4 left-4 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-900" x-text="t.projects.statusOngoing">
+              </span>
+              <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
+              </button>
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=900&fit=crop&q=90" 
+                     alt="Vila Kunice" 
+                     class="w-full h-64 md:h-72 object-cover">
+              </div>
+            </div>
+            <div class="p-6 text-center">
+              <p class="text-sm font-medium text-gray-700" x-text="t.projects.project2.location"></p>
+            </div>
+            
+            <!-- Info Overlay -->
+            <div class="project-info-overlay" :class="showInfo && 'active'">
+              <button @click.stop="showInfo = false" class="close-btn">
+                <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+              <div class="text-center space-y-4 max-w-xs" @click.stop>
+                <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project2.name"></h4>
+                <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project2.description"></p>
+                <div class="pt-3 space-y-1.5 text-sm text-gray-600">
+                  <p class="font-medium"><span x-text="t.projects.area"></span>: <span class="text-gray-900">280 m²</span></p>
+                  <p class="font-medium"><span x-text="t.projects.rooms"></span>: <span class="text-gray-900">6+1</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="reveal">
+          <div class="project-card bg-white" x-data="{showInfo: false}">
+            <div class="relative">
+              <span class="status-badge absolute top-4 left-4 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-900" x-text="t.projects.statusCompleted">
+              </span>
+              <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
+              </button>
+              <div class="overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=900&fit=crop&q=90" 
+                     alt="Vila Kunice" 
+                     class="w-full h-64 md:h-72 object-cover">
+              </div>
+            </div>
+            <div class="p-6 text-center">
+              <p class="text-sm font-medium text-gray-700" x-text="t.projects.project3.location"></p>
+            </div>
+            
+            <!-- Info Overlay -->
+            <div class="project-info-overlay" :class="showInfo && 'active'">
+              <button @click.stop="showInfo = false" class="close-btn">
+                <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+              <div class="text-center space-y-4 max-w-xs" @click.stop>
+                <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project3.name"></h4>
+                <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project3.description"></p>
+                <div class="pt-3 space-y-1.5 text-sm text-gray-600">
+                  <p class="font-medium"><span x-text="t.projects.area"></span>: <span class="text-gray-900">220 m²</span></p>
+                  <p class="font-medium"><span x-text="t.projects.rooms"></span>: <span class="text-gray-900">4+1</span></p>
+                  <p class="font-medium"><span x-text="t.projects.completed"></span>: <span class="text-gray-900">2024</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="py-16 relative">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="reveal">
+        <div class="border-t border-gray-300 pt-12">
+          <div class="text-left space-y-3 text-gray-700">
+            <div class="font-bold text-lg text-gray-900">Sadek Development s.r.o.</div>
+            <div>Babická 2379/1a</div>
+            <div>Praha</div>
+            <div>148 00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Translation data
+    const translations = {
+      cs: {
+        nav: {
+          about: 'O nás',
+          business: 'Oblasti podnikání',
+          projects: 'Projekty',
+          contact: 'Kontakty'
+        },
+        slider: {
+          prev: 'Předchozí',
+          next: 'Další',
+          switchSlide: 'Přepnout slide'
+        },
+        intro: {
+          title: '„Moderní řešení a<br class="hidden sm:block" />rozšiřující se možnosti"',
+          paragraph1: 'Naše developerská společnost se zaměřuje na moderní výstavbu a chytrá řešení pro komfortní bydlení. Každý projekt navrhujeme s důrazem na kvalitu, funkčnost a dlouhodobou hodnotu. Sledujeme aktuální trendy, efektivně plánujeme a propojujeme důraz na estetiku s praktickým využitím prostoru. Díky zkušenému týmu a profesionálnímu přístupu přinášíme klientům spolehlivá a promyšlená řešení v každé fázi výstavby.',
+          paragraph2: 'Současně rozvíjíme své aktivity i mimo oblast developmentu a rozšiřujeme působení do segmentu řidičského coachingu a souvisejících služeb. Naším cílem je nabídnout moderní, bezpečná a praktická školení, která podporují rozvoj dovedností a přinášejí klientům skutečnou přidanou hodnotu.'
+        },
+        businessAreas: {
+          title: 'OBLASTI PODNIKÁNÍ',
+          construction: 'Výstavba nemovitostí',
+          education: 'Edukace'
+        },
+        projects: {
+          title: 'PROJEKTY',
+          statusOngoing: 'Právě probíhá',
+          statusCompleted: 'Dokončeno',
+          info: 'Info',
+          area: 'Plocha',
+          rooms: 'Pokoje',
+          completed: 'Dokončeno',
+          project1: {
+            name: 'Vila Kunice',
+            location: 'Vila / Kunice pod Ondřejníkem',
+            description: 'Moderní vila s výhledem na Ondřejník. Dokončení plánováno na Q2 2025.'
+          },
+          project2: {
+            name: 'Vila Kunice',
+            location: 'Vila / Kunice pod Ondřejníkem',
+            description: 'Moderní vila s výhledem na Ondřejník. Dokončení plánováno na Q3 2025.'
+          },
+          project3: {
+            name: 'Vila Kunice',
+            location: 'Vila / Kunice pod Ondřejníkem',
+            description: 'Dokončený projekt s moderním designem a udržitelným řešením.'
+          }
+        }
+      },
+      en: {
+        nav: {
+          about: 'About Us',
+          business: 'Business Areas',
+          projects: 'Projects',
+          contact: 'Contact'
+        },
+        slider: {
+          prev: 'Previous',
+          next: 'Next',
+          switchSlide: 'Switch slide'
+        },
+        intro: {
+          title: '"Modern Solutions and<br class="hidden sm:block" />Expanding Opportunities"',
+          paragraph1: 'Our development company focuses on modern construction and smart solutions for comfortable living. We design each project with an emphasis on quality, functionality and long-term value. We follow current trends, plan efficiently and combine focus on aesthetics with practical use of space. Thanks to our experienced team and professional approach, we bring clients reliable and thoughtful solutions at every stage of construction.',
+          paragraph2: 'At the same time, we are developing our activities beyond development and expanding into the segment of driver coaching and related services. Our goal is to offer modern, safe and practical training that supports skill development and brings real added value to clients.'
+        },
+        businessAreas: {
+          title: 'BUSINESS AREAS',
+          construction: 'Real Estate Development',
+          education: 'Education'
+        },
+        projects: {
+          title: 'PROJECTS',
+          statusOngoing: 'Ongoing',
+          statusCompleted: 'Completed',
+          info: 'Info',
+          area: 'Area',
+          rooms: 'Rooms',
+          completed: 'Completed',
+          project1: {
+            name: 'Kunice Villa',
+            location: 'Villa / Kunice pod Ondřejníkem',
+            description: 'Modern villa with a view of Ondřejník. Completion planned for Q2 2025.'
+          },
+          project2: {
+            name: 'Kunice Villa',
+            location: 'Villa / Kunice pod Ondřejníkem',
+            description: 'Modern villa with a view of Ondřejník. Completion planned for Q3 2025.'
+          },
+          project3: {
+            name: 'Kunice Villa',
+            location: 'Villa / Kunice pod Ondřejníkem',
+            description: 'Completed project with modern design and sustainable solution.'
+          }
+        }
+      }
+    };
+
+    // Reveal on scroll
+    (function(){
+      const els = Array.from(document.querySelectorAll('.reveal'));
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(el => el.classList.add('show'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('show');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(el => io.observe(el));
+    })();
+
+    function pageApp(){
+      return {
+        scrolled: false,
+        currentLang: 'cs',
+        t: translations.cs,
+        
+        init() {
+          // Load saved language preference
+          const saved = localStorage.getItem('siteLanguage');
+          if (saved && translations[saved]) {
+            this.currentLang = saved;
+            this.t = translations[saved];
+            document.documentElement.lang = saved;
+          }
+        },
+        
+        switchLanguage(lang) {
+          this.currentLang = lang;
+          this.t = translations[lang];
+          document.documentElement.lang = lang;
+          localStorage.setItem('siteLanguage', lang);
+        },
+        
+        onScroll(){
+          const st = document.documentElement.scrollTop || document.body.scrollTop;
+          this.scrolled = st > 50;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

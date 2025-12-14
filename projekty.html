@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadek Development - Realizace</title>
+    
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        
+        /* Sophisticated light background */
+        body {
+          background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
+          position: relative;
+          overflow-x: hidden;
+        }
+        
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+          transition: all 0.3s ease;
+        }
+        
+        .nav-scrolled {
+          background: rgba(255, 255, 255, 0.85) !important;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Hero image */
+        .hero-wrapper {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .hero-wrapper img {
+          transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero-wrapper:hover img {
+          transform: scale(1.05);
+        }
+
+        /* Reveal animations */
+        .js .reveal {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        
+        .reveal.show {
+          opacity: 1;
+          transform: translateY(0);
+          transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glass card for intro */
+        .glass-intro {
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          border-radius: 32px;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Project cards - Apple style with click interaction */
+        .project-card {
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+          position: relative;
+          background: white;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+        }
+        
+        .project-card:hover {
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+          transform: translateY(-4px);
+        }
+        
+        .project-info-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(40px) saturate(180%);
+          -webkit-backdrop-filter: blur(40px) saturate(180%);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+        }
+        
+        .project-info-overlay.active {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        
+        .close-btn {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.06);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+        
+        .close-btn:hover {
+          background: rgba(0, 0, 0, 0.1);
+          transform: scale(1.1);
+        }
+
+        /* Status badge */
+        .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 9999px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+        }
+        
+        .status-badge.progress {
+          background: rgba(59, 130, 246, 0.1);
+          color: rgb(37, 99, 235);
+        }
+        
+        .status-badge.completed {
+          background: rgba(34, 197, 94, 0.1);
+          color: rgb(22, 163, 74);
+        }
+        
+        .status-indicator {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+        }
+        
+        .status-badge.progress .status-indicator {
+          background: rgb(59, 130, 246);
+          animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .status-badge.completed .status-indicator {
+          background: rgb(34, 197, 94);
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+
+        /* Language selector styling */
+        .lang-btn {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .lang-btn:hover {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .lang-dropdown {
+          z-index: 100;
+        }
+        
+        .lang-option {
+          font-size: 0.9rem;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: #f8f7f5;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #ef4444, #dc2626);
+          border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #dc2626, #b91c1c);
+        }
+
+        /* Page title */
+        .page-title {
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 antialiased"
+      x-data="pageApp()"
+      @scroll.window="onScroll()">
+    
+    <!-- Navigation -->
+    <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
+        <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="h-20 flex items-center justify-between">
+                    <a href="index.html" class="text-white font-bold text-xl tracking-tight">
+                        Sadek Development
+                    </a>
+                    
+                    <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+                        <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.about">
+                        </a>
+                        <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.business">
+                        </a>
+                        <a href="projekty.html" class="text-white hover:text-white transition-colors duration-300" x-text="t.nav.projects">
+                        </a>
+                        <a href="#kontakty" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.contact">
+                        </a>
+                        <div class="relative" x-data="{ langOpen: false }">
+                            <button @click="langOpen = !langOpen" 
+                                    class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                                </svg>
+                                <span class="font-medium" x-text="currentLang.toUpperCase()"></span>
+                                <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            
+                            <div x-show="langOpen" 
+                                 @click.away="langOpen = false"
+                                 x-transition:enter="transition ease-out duration-200"
+                                 x-transition:enter-start="opacity-0 scale-95"
+                                 x-transition:enter-end="opacity-100 scale-100"
+                                 x-transition:leave="transition ease-in duration-150"
+                                 x-transition:leave-start="opacity-100 scale-100"
+                                 x-transition:leave-end="opacity-0 scale-95"
+                                 class="lang-dropdown absolute right-0 mt-3 w-40 origin-top-right"
+                                 style="display: none;">
+                                <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 py-2 overflow-hidden">
+                                    <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false" 
+                                       class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+                                       :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                                        <span class="text-2xl">🇨🇿</span>
+                                        <span class="font-medium">Čeština</span>
+                                    </a>
+                                    <a href="#" @click.prevent="switchLanguage('en'); langOpen = false" 
+                                       class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+                                       :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                                        <span class="text-2xl">🇬🇧</span>
+                                        <span class="font-medium">English</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="md:hidden text-white">
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-20 reveal">
+        <div class="hero-wrapper relative h-[400px] md:h-[500px] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1800&h=1000&fit=crop&q=90" 
+                 alt="Realizace" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <!-- Title & Intro -->
+            <div class="text-center mb-20 reveal">
+                <h1 class="text-4xl md:text-6xl font-black text-gray-900 page-title mb-8" x-text="t.pageTitle">
+                </h1>
+                <div class="w-24 h-1 mx-auto bg-gradient-to-r from-red-500 to-orange-500 rounded-full mb-12"></div>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-intro p-10 md:p-14">
+                        <p class="text-2xl md:text-3xl font-bold text-gray-900 mb-6" x-text="t.intro.title">
+                        </p>
+                        <div class="space-y-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                            <p x-text="t.intro.paragraph1"></p>
+                            <p class="font-medium" x-text="t.intro.paragraph2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-20">
+                
+                <!-- Právě probíhá -->
+                <div class="reveal">
+                    <div class="mb-8">
+                        <div class="status-badge progress">
+                            <span class="status-indicator"></span>
+                            <span x-text="t.statusOngoing"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <!-- Project 1 -->
+                        <div class="project-card" x-data="{showInfo: false}">
+                            <div class="relative" @click="showInfo = true">
+                                <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&h=600&fit=crop&q=90" 
+                                     alt="Vila Kunice" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-sm font-medium text-gray-700" x-text="t.project1.location"></p>
+                            </div>
+                            
+                            <!-- Info Overlay -->
+                            <div class="project-info-overlay" :class="showInfo && 'active'">
+                                <button @click.stop="showInfo = false" class="close-btn">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                                <div class="text-center space-y-4 max-w-md" @click.stop>
+                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.project1.name"></h4>
+                                    <p class="text-gray-600 leading-relaxed" x-text="t.project1.description"></p>
+                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
+                                        <p class="font-medium"><span x-text="t.labels.area"></span>: <span class="text-gray-900">250 m²</span></p>
+                                        <p class="font-medium"><span x-text="t.labels.rooms"></span>: <span class="text-gray-900">5+1</span></p>
+                                        <p class="font-medium"><span x-text="t.labels.garage"></span>: <span class="text-gray-900" x-text="t.project1.garageCount"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card" x-data="{showInfo: false}">
+                            <div class="relative" @click="showInfo = true">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=90" 
+                                     alt="Rezidence Kunice" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-sm font-medium text-gray-700" x-text="t.project2.location"></p>
+                            </div>
+                            
+                            <!-- Info Overlay -->
+                            <div class="project-info-overlay" :class="showInfo && 'active'">
+                                <button @click.stop="showInfo = false" class="close-btn">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                                <div class="text-center space-y-4 max-w-md" @click.stop>
+                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.project2.name"></h4>
+                                    <p class="text-gray-600 leading-relaxed" x-text="t.project2.description"></p>
+                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
+                                        <p class="font-medium"><span x-text="t.labels.area"></span>: <span class="text-gray-900">320 m²</span></p>
+                                        <p class="font-medium"><span x-text="t.labels.rooms"></span>: <span class="text-gray-900">6+1</span></p>
+                                        <p class="font-medium"><span x-text="t.labels.energyClass"></span>: <span class="text-gray-900">A</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dokončeno -->
+                <div class="reveal">
+                    <div class="mb-8 text-right lg:text-left">
+                        <div class="status-badge completed inline-flex">
+                            <span class="status-indicator"></span>
+                            <span x-text="t.statusCompleted"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <!-- Project 3 -->
+                        <div class="project-card" x-data="{showInfo: false}">
+                            <div class="relative" @click="showInfo = true">
+                                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=90" 
+                                     alt="Vila Dokončená" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-sm font-medium text-gray-700" x-text="t.project3.location"></p>
+                            </div>
+                            
+                            <!-- Info Overlay -->
+                            <div class="project-info-overlay" :class="showInfo && 'active'">
+                                <button @click.stop="showInfo = false" class="close-btn">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                                <div class="text-center space-y-4 max-w-md" @click.stop>
+                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.project3.name"></h4>
+                                    <p class="text-gray-600 leading-relaxed" x-text="t.project3.description"></p>
+                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
+                                        <p class="font-medium"><span x-text="t.labels.area"></span>: <span class="text-gray-900">280 m²</span></p>
+                                        <p class="font-medium"><span x-text="t.labels.rooms"></span>: <span class="text-gray-900">5+1</span></p>
+                                        <p class="font-medium"><span x-text="t.labels.completed"></span>: <span class="text-gray-900">2024</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontakty" class="py-16 relative border-t border-gray-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="reveal">
+                <div class="text-left space-y-3 text-gray-700">
+                    <div class="font-bold text-lg text-gray-900">Sadek Development s.r.o.</div>
+                    <div>Babická 2379/1a</div>
+                    <div>Praha</div>
+                    <div>148 00</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translation data
+        const translations = {
+            cs: {
+                nav: {
+                    about: 'O nás',
+                    business: 'Oblasti podnikání',
+                    projects: 'Projekty',
+                    contact: 'Kontakty'
+                },
+                pageTitle: 'REALIZACE',
+                intro: {
+                    title: 'Každý domov začíná vizí.',
+                    paragraph1: 'Věříme, že prostor, ve kterém žijeme, formuje způsob, jakým myslíme, tvoříme i odpočíváme. Naším cílem je proto vytvářet místa, která nejsou jen stavebním projektem, ale pevným bodem v proměnlivém světě. Domy, které rostou z promyšlených detailů, respektu k lokalitě a poctivého řemesla.',
+                    paragraph2: 'Stavíme prostředí, kde se rodí příběhy – a každý z nich začíná právě tady.'
+                },
+                statusOngoing: 'Právě probíhá',
+                statusCompleted: 'Dokončeno',
+                labels: {
+                    area: 'Plocha',
+                    rooms: 'Pokoje',
+                    garage: 'Garáž',
+                    energyClass: 'Energetická třída',
+                    completed: 'Dokončeno'
+                },
+                project1: {
+                    name: 'Vila Kunice',
+                    location: 'Vila / Kunice pod Ondřejníkem',
+                    description: 'Moderní rodinný dům s garáží pro dvě vozidla. Dřevěný obklad, panoramatická okna a propojení s přírodou. Dokončení plánováno na Q2 2025.',
+                    garageCount: '2 vozidla'
+                },
+                project2: {
+                    name: 'Rezidence Kunice',
+                    location: 'Vila / Kunice pod Ondřejníkem',
+                    description: 'Luxusní bydlení v klidném prostředí s moderními technologiemi. Důraz na energetickou účinnost a komfort.'
+                },
+                project3: {
+                    name: 'Vila Dokončená',
+                    location: 'Vila / Kunice pod Ondřejníkem',
+                    description: 'Úspěšně dokončený projekt s vysokými standardy bydlení. Reference kvalitní práce a pozornosti k detailu.'
+                }
+            },
+            en: {
+                nav: {
+                    about: 'About Us',
+                    business: 'Business Areas',
+                    projects: 'Projects',
+                    contact: 'Contact'
+                },
+                pageTitle: 'PROJECTS',
+                intro: {
+                    title: 'Every home begins with a vision.',
+                    paragraph1: 'We believe that the space in which we live shapes the way we think, create and rest. Our goal is therefore to create places that are not just a construction project, but a fixed point in a changing world. Homes that grow from thoughtful details, respect for the location and honest craftsmanship.',
+                    paragraph2: 'We build environments where stories are born – and each one begins right here.'
+                },
+                statusOngoing: 'Ongoing',
+                statusCompleted: 'Completed',
+                labels: {
+                    area: 'Area',
+                    rooms: 'Rooms',
+                    garage: 'Garage',
+                    energyClass: 'Energy Class',
+                    completed: 'Completed'
+                },
+                project1: {
+                    name: 'Kunice Villa',
+                    location: 'Villa / Kunice pod Ondřejníkem',
+                    description: 'Modern family house with garage for two vehicles. Wooden cladding, panoramic windows and connection with nature. Completion planned for Q2 2025.',
+                    garageCount: '2 vehicles'
+                },
+                project2: {
+                    name: 'Kunice Residence',
+                    location: 'Villa / Kunice pod Ondřejníkem',
+                    description: 'Luxury living in a quiet environment with modern technologies. Emphasis on energy efficiency and comfort.'
+                },
+                project3: {
+                    name: 'Completed Villa',
+                    location: 'Villa / Kunice pod Ondřejníkem',
+                    description: 'Successfully completed project with high living standards. Reference of quality work and attention to detail.'
+                }
+            }
+        };
+
+        // Reveal on scroll
+        (function(){
+          const els = Array.from(document.querySelectorAll('.reveal'));
+          if (!('IntersectionObserver' in window)) {
+            els.forEach(el => el.classList.add('show'));
+            return;
+          }
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                e.target.classList.add('show');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.1 });
+          els.forEach(el => io.observe(el));
+        })();
+
+        function pageApp(){
+          return {
+            scrolled: false,
+            currentLang: 'cs',
+            t: translations.cs,
+            
+            init() {
+              // Load saved language preference from localStorage
+              const saved = localStorage.getItem('siteLanguage');
+              if (saved && translations[saved]) {
+                this.currentLang = saved;
+                this.t = translations[saved];
+                document.documentElement.lang = saved;
+              }
+            },
+            
+            switchLanguage(lang) {
+              this.currentLang = lang;
+              this.t = translations[lang];
+              document.documentElement.lang = lang;
+              // Save to localStorage so it persists across all pages
+              localStorage.setItem('siteLanguage', lang);
+            },
+            
+            onScroll(){
+              const st = document.documentElement.scrollTop || document.body.scrollTop;
+              this.scrolled = st > 50;
+            }
+          }
+        }
+    </script>
+</body>
+</html>

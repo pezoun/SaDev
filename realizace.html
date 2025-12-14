@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadek Development - Realizace</title>
+    
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        
+        /* Sophisticated light background */
+        body {
+          background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
+          position: relative;
+          overflow-x: hidden;
+        }
+        
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+          transition: all 0.3s ease;
+        }
+        
+        .nav-scrolled {
+          background: rgba(255, 255, 255, 0.85) !important;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Hero image */
+        .hero-wrapper {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .hero-wrapper img {
+          transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero-wrapper:hover img {
+          transform: scale(1.05);
+        }
+
+        /* Reveal animations */
+        .js .reveal {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        
+        .reveal.show {
+          opacity: 1;
+          transform: translateY(0);
+          transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glass card for intro */
+        .glass-intro {
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          border-radius: 32px;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Project cards - Apple style with click interaction */
+        .project-card {
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+          position: relative;
+          background: white;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+        }
+        
+        .project-card:hover {
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+          transform: translateY(-4px);
+        }
+        
+        .project-info-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(40px) saturate(180%);
+          -webkit-backdrop-filter: blur(40px) saturate(180%);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+        }
+        
+        .project-info-overlay.active {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        
+        .close-btn {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.06);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+        
+        .close-btn:hover {
+          background: rgba(0, 0, 0, 0.1);
+          transform: scale(1.1);
+        }
+
+        /* Status badge */
+        .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 9999px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+        }
+        
+        .status-badge.progress {
+          background: rgba(59, 130, 246, 0.1);
+          color: rgb(37, 99, 235);
+        }
+        
+        .status-badge.completed {
+          background: rgba(34, 197, 94, 0.1);
+          color: rgb(22, 163, 74);
+        }
+        
+        .status-indicator {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+        }
+        
+        .status-badge.progress .status-indicator {
+          background: rgb(59, 130, 246);
+          animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .status-badge.completed .status-indicator {
+          background: rgb(34, 197, 94);
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: #f8f7f5;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #ef4444, #dc2626);
+          border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #dc2626, #b91c1c);
+        }
+
+        /* Page title */
+        .page-title {
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 antialiased"
+      x-data="pageUi()"
+      @scroll.window="onScroll()">
+    
+    <!-- Navigation -->
+    <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
+        <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="h-20 flex items-center justify-between">
+                    <a href="index.html" class="text-white font-bold text-xl tracking-tight">
+                        Sadek Development
+                    </a>
+                    
+                    <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+                        <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300">
+                            O nás
+                        </a>
+                        <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300">
+                            Oblasti podnikání
+                        </a>
+                        <a href="projekty.html" class="text-white hover:text-white transition-colors duration-300">
+                            Projekty
+                        </a>
+                        <a href="#kontakty" class="text-white/80 hover:text-white transition-colors duration-300">
+                            Kontakty
+                        </a>
+                        <button class="text-white/80 hover:text-white flex items-center gap-1.5 transition-colors duration-300">
+                            CS
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button class="md:hidden text-white">
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-20 reveal">
+        <div class="hero-wrapper relative h-[400px] md:h-[500px] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1800&h=1000&fit=crop&q=90" 
+                 alt="Realizace" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <!-- Title & Intro -->
+            <div class="text-center mb-20 reveal">
+                <h1 class="text-4xl md:text-6xl font-black text-gray-900 page-title mb-8">
+                    REALIZACE
+                </h1>
+                <div class="w-24 h-1 mx-auto bg-gradient-to-r from-red-500 to-orange-500 rounded-full mb-12"></div>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="glass-intro p-10 md:p-14">
+                        <p class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                            Každý domov začíná vizí.
+                        </p>
+                        <div class="space-y-5 text-gray-700 leading-relaxed text-base md:text-lg">
+                            <p>
+                                Věříme, že prostor, ve kterém žijeme, formuje způsob, jakým myslíme, tvoříme i odpočíváme. 
+                                Naším cílem je proto vytvářet místa, která nejsou jen stavebním projektem, ale pevným bodem 
+                                v proměnlivém světě. Domy, které rostou z promyšlených detailů, respektu k lokalitě a poctivého řemesla.
+                            </p>
+                            <p class="font-medium">
+                                Stavíme prostředí, kde se rodí příběhy – a každý z nich začíná právě tady.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-20">
+                
+                <!-- Právě probíhá -->
+                <div class="reveal">
+                    <div class="mb-8">
+                        <div class="status-badge progress">
+                            <span class="status-indicator"></span>
+                            Právě probíhá
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <!-- Project 1 -->
+                        <div class="project-card" x-data="{showInfo: false}">
+                            <div class="relative" @click="showInfo = true">
+                                <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&h=600&fit=crop&q=90" 
+                                     alt="Vila Kunice" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-sm font-medium text-gray-700">Vila / Kunice pod Ondřejníkem</p>
+                            </div>
+                            
+                            <!-- Info Overlay -->
+                            <div class="project-info-overlay" :class="showInfo && 'active'">
+                                <button @click.stop="showInfo = false" class="close-btn">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                                <div class="text-center space-y-4 max-w-md" @click.stop>
+                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;">Vila Kunice</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Moderní rodinný dům s garáží pro dvě vozidla. Dřevěný obklad, panoramatická okna 
+                                        a propojení s přírodou. Dokončení plánováno na Q2 2025.
+                                    </p>
+                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
+                                        <p class="font-medium">Plocha: <span class="text-gray-900">250 m²</span></p>
+                                        <p class="font-medium">Pokoje: <span class="text-gray-900">5+1</span></p>
+                                        <p class="font-medium">Garáž: <span class="text-gray-900">2 vozidla</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card" x-data="{showInfo: false}">
+                            <div class="relative" @click="showInfo = true">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=90" 
+                                     alt="Rezidence Kunice" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-sm font-medium text-gray-700">Vila / Kunice pod Ondřejníkem</p>
+                            </div>
+                            
+                            <!-- Info Overlay -->
+                            <div class="project-info-overlay" :class="showInfo && 'active'">
+                                <button @click.stop="showInfo = false" class="close-btn">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                                <div class="text-center space-y-4 max-w-md" @click.stop>
+                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;">Rezidence Kunice</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Luxusní bydlení v klidném prostředí s moderními technologiemi. 
+                                        Důraz na energetickou účinnost a komfort.
+                                    </p>
+                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
+                                        <p class="font-medium">Plocha: <span class="text-gray-900">320 m²</span></p>
+                                        <p class="font-medium">Pokoje: <span class="text-gray-900">6+1</span></p>
+                                        <p class="font-medium">Energetická třída: <span class="text-gray-900">A</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dokončeno -->
+                <div class="reveal">
+                    <div class="mb-8 text-right lg:text-left">
+                        <div class="status-badge completed inline-flex">
+                            <span class="status-indicator"></span>
+                            Dokončeno
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <!-- Project 3 -->
+                        <div class="project-card" x-data="{showInfo: false}">
+                            <div class="relative" @click="showInfo = true">
+                                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=90" 
+                                     alt="Vila Dokončená" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <p class="text-sm font-medium text-gray-700">Vila / Kunice pod Ondřejníkem</p>
+                            </div>
+                            
+                            <!-- Info Overlay -->
+                            <div class="project-info-overlay" :class="showInfo && 'active'">
+                                <button @click.stop="showInfo = false" class="close-btn">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                                <div class="text-center space-y-4 max-w-md" @click.stop>
+                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;">Vila Dokončená</h4>
+                                    <p class="text-gray-600 leading-relaxed">
+                                        Úspěšně dokončený projekt s vysokými standardy bydlení. 
+                                        Reference kvalitní práce a pozornosti k detailu.
+                                    </p>
+                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
+                                        <p class="font-medium">Plocha: <span class="text-gray-900">280 m²</span></p>
+                                        <p class="font-medium">Pokoje: <span class="text-gray-900">5+1</span></p>
+                                        <p class="font-medium">Dokončeno: <span class="text-gray-900">2024</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontakty" class="py-16 relative border-t border-gray-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="reveal">
+                <div class="text-left space-y-3 text-gray-700">
+                    <div class="font-bold text-lg text-gray-900">Sadek Development s.r.o.</div>
+                    <div>Babická 2379/1a</div>
+                    <div>Praha</div>
+                    <div>148 00</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal on scroll
+        (function(){
+          const els = Array.from(document.querySelectorAll('.reveal'));
+          if (!('IntersectionObserver' in window)) {
+            els.forEach(el => el.classList.add('show'));
+            return;
+          }
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                e.target.classList.add('show');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.1 });
+          els.forEach(el => io.observe(el));
+        })();
+
+        function pageUi(){
+          return {
+            scrolled: false,
+            onScroll(){
+              const st = document.documentElement.scrollTop || document.body.scrollTop;
+              this.scrolled = st > 50;
+            }
+          }
+        }
+    </script>
+</body>
+</html>
