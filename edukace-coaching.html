@@ -17,14 +17,13 @@
 
   <style>
     * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-    
-    /* Sophisticated light background with subtle patterns */
+
     body {
       background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
       position: relative;
       overflow-x: hidden;
     }
-    
+
     body::before {
       content: '';
       position: fixed;
@@ -32,7 +31,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: 
+      background:
         radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
         url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -40,7 +39,6 @@
       z-index: 0;
     }
 
-    /* Premium glass cards - light theme */
     .glass-card {
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(20px);
@@ -51,7 +49,7 @@
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     }
-    
+
     .glass-card::before {
       content: '';
       position: absolute;
@@ -62,25 +60,22 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
       transition: left 0.7s;
     }
-    
-    .glass-card:hover::before {
-      left: 100%;
-    }
-    
+
+    .glass-card:hover::before { left: 100%; }
+
     .glass-card:hover {
       transform: translateY(-12px) scale(1.02);
       border-color: rgba(0, 0, 0, 0.12);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 0 40px rgba(239, 68, 68, 0.08);
     }
 
-    /* Premium image styling */
     .img-premium {
       border-radius: 20px;
       overflow: hidden;
       position: relative;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
-    
+
     .img-premium::after {
       content: '';
       position: absolute;
@@ -90,43 +85,31 @@
       transition: opacity 0.5s;
       pointer-events: none;
     }
-    
-    .img-premium:hover::after {
-      opacity: 1;
-    }
-    
+
+    .img-premium:hover::after { opacity: 1; }
+
     .img-premium img {
       transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       display: block;
     }
-    
-    .img-premium:hover img {
-      transform: scale(1.08);
-    }
 
-    /* Reveal animations */
-    .js .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    
+    .img-premium:hover img { transform: scale(1.08); }
+
+    .js .reveal { opacity: 0; transform: translateY(40px); }
+
     .reveal.show {
       opacity: 1;
       transform: translateY(0);
       transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Subtle text shadow for depth */
-    .text-depth {
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
+    .text-depth { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
 
-    /* Accent lines - red theme */
     .accent-line {
       position: relative;
       padding-left: 24px;
     }
-    
+
     .accent-line::before {
       content: '';
       position: absolute;
@@ -140,36 +123,30 @@
       box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
     }
 
-    /* Navigation enhancement */
-    nav {
-      transition: all 0.3s ease;
-    }
-    
+    nav { transition: all 0.3s ease; }
+
     .nav-scrolled {
       background: rgba(255, 255, 255, 0.85) !important;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
-    /* Progress bar */
     .progress-bar {
       background: linear-gradient(90deg, #ef4444, #f97316, #eab308);
       box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
     }
 
-    /* Lightbox enhancement */
     .lb-backdrop {
       background: rgba(250, 249, 247, 0.95);
       backdrop-filter: blur(10px);
     }
 
-    /* Button hover effects */
     .btn-glass {
       background: rgba(255, 255, 255, 0.8);
       border: 1px solid rgba(0, 0, 0, 0.1);
       transition: all 0.3s;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-    
+
     .btn-glass:hover {
       background: rgba(255, 255, 255, 0.95);
       border-color: rgba(0, 0, 0, 0.15);
@@ -177,47 +154,46 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     }
 
-    /* Floating animation */
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-    
-    .float {
-      animation: float 6s ease-in-out infinite;
-    }
+    .float { animation: float 6s ease-in-out infinite; }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f8f7f5;
-    }
-    
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f8f7f5; }
     ::-webkit-scrollbar-thumb {
       background: linear-gradient(180deg, #ef4444, #dc2626);
       border-radius: 5px;
     }
-    
     ::-webkit-scrollbar-thumb:hover {
       background: linear-gradient(180deg, #dc2626, #b91c1c);
     }
 
-    /* Icon decoration */
     .icon-wrapper {
       background: linear-gradient(135deg, #ef4444, #f97316);
       box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25);
     }
+
+    /* Language selector styling (stejné jako v simulátoru) */
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .lang-dropdown { z-index: 100; }
+    .lang-option { font-size: 0.9rem; }
   </style>
 </head>
 
 <body class="antialiased"
-      x-data="pageUi()"
+      x-data="pageApp()"
       @scroll.window="onScroll()"
       @keydown.window.escape="close()">
-  
+
   <!-- Navigation -->
   <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
     <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
@@ -228,35 +204,57 @@
           </a>
 
           <div class="hidden md:flex items-center gap-10 text-sm font-medium">
-            <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300">
-              O nás
-            </a>
-            <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300">
-              Oblasti podnikání
-            </a>
-            <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300">
-              Projekty
-            </a>
-            <a href="#kontakty" class="text-white/80 hover:text-white transition-colors duration-300">
-              Kontakty
-            </a>
-            <button class="text-white/80 hover:text-white flex items-center gap-1.5 transition-colors duration-300">
-              CS
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-              </svg>
-            </button>
-          </div>
+            <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300"
+               x-text="t.nav.about"></a>
+            <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300"
+               x-text="t.nav.business"></a>
+            <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300"
+               x-text="t.nav.projects"></a>
+            <a href="#kontakty" class="text-white/80 hover:text-white transition-colors duration-300"
+               x-text="t.nav.contact"></a>
 
-          <button class="md:hidden text-white">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-          </button>
-        </div>
-      </div>
+            <!-- Language dropdown (převzato ze simulátoru) -->
+            <div class="relative" x-data="{ langOpen: false }">
+  <button @click="langOpen = !langOpen" 
+          class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+    </svg>
+    <span class="font-medium" x-text="currentLang.toUpperCase()"></span>
+    <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <div x-show="langOpen" 
+       @click.away="langOpen = false"
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95"
+       class="lang-dropdown absolute right-0 mt-3 w-40 origin-top-right"
+       style="display: none;">
+    <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 py-2 overflow-hidden">
+      <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false" 
+         class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+         :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+        <span class="text-2xl">🇨🇿</span>
+        <span class="font-medium">Čeština</span>
+      </a>
+      <a href="#" @click.prevent="switchLanguage('en'); langOpen = false" 
+         class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+         :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+        <span class="text-2xl">🇬🇧</span>
+        <span class="font-medium">English</span>
+      </a>
     </div>
-    
+  </div>
+</div>
+
     <!-- Progress bar -->
     <div class="h-1 bg-black/5">
       <div class="h-1 progress-bar transition-[width] duration-300 ease-out" :style="`width:${scrollPct}%`"></div>
@@ -270,11 +268,10 @@
       <!-- Hero Title -->
       <div class="text-center mb-24 reveal">
         <div class="inline-block mb-6">
-          <span class="text-red-500 text-sm font-semibold tracking-wider uppercase">Profesionální příprava</span>
+          <span class="text-red-500 text-sm font-semibold tracking-wider uppercase" x-text="t.badge"></span>
         </div>
-        <h1 class="text-5xl md:text-7xl font-black mb-6 text-gray-900 text-depth" style="letter-spacing: -0.02em;">
-          ŘIDIČSKÝ COACHING
-        </h1>
+        <h1 class="text-5xl md:text-7xl font-black mb-6 text-gray-900 text-depth" style="letter-spacing: -0.02em;"
+            x-text="t.pageTitle"></h1>
         <div class="w-24 h-1 mx-auto bg-gradient-to-r from-red-500 to-orange-500 rounded-full shadow-lg"></div>
       </div>
 
@@ -284,9 +281,9 @@
           <button class="w-full text-left group" @click="open(0)">
             <div class="glass-card p-3 float">
               <div class="img-premium">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&h=900&fit=crop&q=90"
+                <img src="fotky web sadek/IMG_8143.JPG"
                      alt="Toyota Supra"
-                     class="w-full h-[400px] object-cover">
+                     class="w-full h-[400px] object-cover" src="fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG">
               </div>
             </div>
           </button>
@@ -294,12 +291,8 @@
 
         <div class="reveal">
           <div class="space-y-6 accent-line">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-              Rychlost není cílem.<br>Cílem je porozumění.
-            </h2>
-            <p class="text-gray-700 text-lg leading-relaxed">
-              Na závodní trati nejde jen o to, jak rychle projedete zatáčku, ale jak hluboce rozumíte sobě, svému vozu a fyzice okamžiku.
-            </p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight" x-html="t.s1Title"></h2>
+            <p class="text-gray-700 text-lg leading-relaxed" x-text="t.s1Text"></p>
           </div>
         </div>
       </div>
@@ -308,12 +301,8 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-32">
         <div class="reveal order-2 lg:order-1">
           <div class="space-y-6 accent-line">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-              Cesta k dokonalosti
-            </h2>
-            <p class="text-gray-700 text-lg leading-relaxed">
-              Řidičský coaching na okruhu přináší víc než techniku – je to cesta k jistotě, klidu a přesnosti, které vznikají až tehdy, kdy se člověk naučí číst trať stejně jako vlastní instinkty.
-            </p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight" x-text="t.s2Title"></h2>
+            <p class="text-gray-700 text-lg leading-relaxed" x-text="t.s2Text"></p>
           </div>
         </div>
 
@@ -321,9 +310,9 @@
           <button class="w-full text-left group" @click="open(1)">
             <div class="glass-card p-3">
               <div class="img-premium">
-                <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=1400&h=900&fit=crop&q=90"
+                <img src="fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG"
                      alt="Autodrom Most"
-                     class="w-full h-[400px] object-cover">
+                     class="w-full h-[400px] object-cover" src="fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG">
               </div>
             </div>
           </button>
@@ -336,9 +325,9 @@
           <button class="w-full text-left group" @click="open(2)">
             <div class="glass-card p-3 float" style="animation-delay: 0.5s;">
               <div class="img-premium">
-                <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1400&h=900&fit=crop&q=90"
+                <img src="fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG"
                      alt="Spa-Francorchamps"
-                     class="w-full h-[400px] object-cover">
+                     class="w-full h-[400px] object-cover" src="fotky web sadek/IMG_8143.JPG">
               </div>
             </div>
           </button>
@@ -346,28 +335,23 @@
 
         <div class="reveal">
           <div class="space-y-6 accent-line">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-              Objevte své limity
-            </h2>
-            <p class="text-gray-700 text-lg leading-relaxed">
-              V každém kole objevujete nové hranice. A možná zjistíte, že ty nejdůležitější se nenacházejí na asfaltu.
-            </p>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight" x-text="t.s3Title"></h2>
+            <p class="text-gray-700 text-lg leading-relaxed" x-text="t.s3Text"></p>
           </div>
         </div>
       </div>
 
-      <!-- Coming Soon Notice -->
+      <!-- Coming Soon Notice (tvůj původní text, jen přepínaný) -->
       <div class="reveal">
         <div class="glass-card p-12 text-center max-w-4xl mx-auto">
           <div class="w-16 h-16 mx-auto mb-6 rounded-full icon-wrapper flex items-center justify-center">
             <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Ve fázi příprav</h3>
-          <p class="text-gray-700 text-lg leading-relaxed max-w-2xl mx-auto">
-            Oblast řidičského coachingu je aktuálně ve fázi příprav. Intenzivně pracujeme na koncepci a obsahu tak, aby mohla v brzké době nabídnout profesionální a prakticky zaměřené služby.
-          </p>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4" x-text="t.comingTitle"></h3>
+          <p class="text-gray-700 text-lg leading-relaxed max-w-2xl mx-auto" x-text="t.comingText"></p>
         </div>
       </div>
 
@@ -384,9 +368,7 @@
               </div>
             </div>
             <div class="flex items-center justify-end">
-              <div class="text-gray-500 text-sm">
-                © 2024 Sadek Development. Všechna práva vyhrazena.
-              </div>
+              <div class="text-gray-500 text-sm" x-text="t.copyright"></div>
             </div>
           </div>
         </div>
@@ -396,16 +378,16 @@
   </main>
 
   <!-- Lightbox -->
-  <div x-show="lbOpen" 
+  <div x-show="lbOpen"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0"
        x-transition:enter-end="opacity-100"
        x-transition:leave="transition ease-in duration-200"
        x-transition:leave-start="opacity-100"
        x-transition:leave-end="opacity-0"
-       class="fixed inset-0 z-[100]" 
+       class="fixed inset-0 z-[100]"
        style="display:none;">
-    
+
     <div class="absolute inset-0 lb-backdrop" @click="close()"></div>
 
     <div class="relative h-full flex items-center justify-center p-4">
@@ -416,10 +398,11 @@
            x-transition:leave="transition ease-in duration-200 transform"
            x-transition:leave-start="opacity-100 scale-100"
            x-transition:leave-end="opacity-0 scale-95">
-        
-        <!-- Controls -->
+
         <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <div class="text-gray-600 text-sm">Obrázek <span x-text="lbIndex + 1"></span> / 3</div>
+          <div class="text-gray-600 text-sm">
+            <span x-text="t.lightboxLabel"></span> <span x-text="lbIndex + 1"></span> / 3
+          </div>
           <div class="flex gap-3">
             <button @click="prev()" class="btn-glass px-4 py-2 rounded-xl text-gray-800">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -439,7 +422,6 @@
           </div>
         </div>
 
-        <!-- Image -->
         <div class="p-6">
           <img :src="images[lbIndex]" alt="" class="w-full h-[70vh] object-contain rounded-xl">
         </div>
@@ -448,35 +430,84 @@
   </div>
 
   <script>
-    // Reveal on scroll
+    // Translation data (stejný princip jako v simulátoru)
+    const translations = {
+      cs: {
+        nav: { about: 'O nás', business: 'Oblasti podnikání', projects: 'Projekty', contact: 'Kontakty' },
+        badge: 'Profesionální příprava',
+        pageTitle: 'ŘIDIČSKÝ COACHING',
+        s1Title: 'Rychlost není cílem.<br>Cílem je porozumění.',
+        s1Text: 'Na závodní trati nejde jen o to, jak rychle projedete zatáčku, ale jak hluboce rozumíte sobě, svému vozu a fyzice okamžiku.',
+        s2Title: 'Cesta k dokonalosti',
+        s2Text: 'Řidičský coaching na okruhu přináší víc než techniku – je to cesta k jistotě, klidu a přesnosti, které vznikají až tehdy, kdy se člověk naučí číst trať stejně jako vlastní instinkty.',
+        s3Title: 'Objevte své limity',
+        s3Text: 'V každém kole objevujete nové hranice. A možná zjistíte, že ty nejdůležitější se nenacházejí na asfaltu.',
+        comingTitle: 'Ve fázi příprav',
+        comingText: 'Oblast řidičského coachingu je aktuálně ve fázi příprav. Intenzivně pracujeme na koncepci a obsahu tak, aby mohla v brzké době nabídnout profesionální a prakticky zaměřené služby.',
+        lightboxLabel: 'Obrázek',
+        copyright: '© 2024 Sadek Development. Všechna práva vyhrazena.'
+      },
+      en: {
+        nav: { about: 'About Us', business: 'Business Areas', projects: 'Projects', contact: 'Contact' },
+        badge: 'Professional preparation',
+        pageTitle: 'DRIVER COACHING',
+        s1Title: 'Speed is not the goal.<br>Understanding is.',
+        s1Text: 'On the racing track, it\'s not just about how fast you take a corner, but how deeply you understand yourself, your car, and the physics of the moment.',
+        s2Title: 'The path to mastery',
+        s2Text: 'Driver coaching on the circuit brings more than technique – it\'s a path to confidence, calm, and precision that emerge only when one learns to read the track as well as their own instincts.',
+        s3Title: 'Discover your limits',
+        s3Text: 'In every lap you discover new limits. And you might find that the most important ones are not found on the asphalt.',
+        comingTitle: 'In preparation',
+        comingText: 'Driver coaching is currently in the preparation phase. We are intensively working on the concept and content so that professional, practical services can be offered soon.',
+        lightboxLabel: 'Image',
+        copyright: '© 2024 Sadek Development. All rights reserved.'
+      }
+    };
+
+    // Reveal on scroll (stejné jako máš)
     (function(){
       const els = Array.from(document.querySelectorAll('.reveal'));
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(el => el.classList.add('show'));
-        return;
-      }
+      if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('show')); return; }
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('show');
-            io.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
         });
       }, { threshold: 0.1 });
       els.forEach(el => io.observe(el));
     })();
 
-    function pageUi(){
+    function pageApp(){
       return {
         scrollPct: 0,
         scrolled: false,
+
+        currentLang: 'cs',
+        t: translations.cs,
+
         lbOpen: false,
         lbIndex: 0,
         images: [
-          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=2000&h=1333&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=2000&h=1333&fit=crop&q=90",
-          "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=2000&h=1333&fit=crop&q=90"
+          "fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG",
+          "fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG",
+          "fotky web sadek/IMG_8143.JPG"
         ],
+
+        init() {
+          const saved = localStorage.getItem('siteLanguage');
+          if (saved && translations[saved]) {
+            this.currentLang = saved;
+            this.t = translations[saved];
+            document.documentElement.lang = saved;
+          }
+        },
+
+        switchLanguage(lang) {
+          this.currentLang = lang;
+          this.t = translations[lang];
+          document.documentElement.lang = lang;
+          localStorage.setItem('siteLanguage', lang);
+        },
+
         onScroll(){
           const doc = document.documentElement;
           const st = doc.scrollTop || document.body.scrollTop;
@@ -484,12 +515,13 @@
           this.scrollPct = sh > 0 ? Math.min(100, Math.max(0, (st / sh) * 100)) : 0;
           this.scrolled = st > 50;
         },
-        open(i){ 
-          this.lbIndex = i; 
+
+        open(i){
+          this.lbIndex = i;
           this.lbOpen = true;
           document.body.style.overflow = 'hidden';
         },
-        close(){ 
+        close(){
           this.lbOpen = false;
           document.body.style.overflow = '';
         },
