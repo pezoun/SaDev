@@ -1,91 +1,92 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <style>
-      .mobile-menu-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(20px);
-        z-index: 100;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      .mobile-menu-link {
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: white;
-        padding: 1rem 2rem;
-        transition: all 0.3s;
-        position: relative;
-      }
-      .mobile-menu-link::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background: #ef4444;
-        transition: all 0.3s;
-        transform: translateX(-50%);
-      }
-      .mobile-menu-link:hover::after { width: 80%; }
-      .mobile-menu-link:hover { color: #ef4444; }
-      .mobile-lang-btn {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 0.75rem 1.5rem;
-        border-radius: 9999px;
-        color: white;
-        font-weight: 500;
-        transition: all 0.3s;
-      }
-      .mobile-lang-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-      .mobile-lang-btn.active {
-        background: rgba(239, 68, 68, 0.2);
-        border-color: rgba(239, 68, 68, 0.4);
-        color: #ef4444;
-      }
-      .close-btn {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s;
-        cursor: pointer;
-      }
-      .close-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: rotate(90deg);
-      }
-      .hamburger {
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-      .hamburger:hover { transform: scale(1.1); }
-      @media (max-width: 768px) {
-        .mobile-menu-link { font-size: 1.5rem; }
-      }
-    </style>
+  <style>
+    [x-cloak]{ display:none !important; }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-menu-link {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: white;
+      padding: 1rem 2rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .mobile-menu-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #ef4444;
+      transition: all 0.3s;
+      transform: translateX(-50%);
+    }
+    .mobile-menu-link:hover::after { width: 80%; }
+    .mobile-menu-link:hover { color: #ef4444; }
+    .mobile-lang-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .mobile-lang-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .mobile-lang-btn.active {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #ef4444;
+    }
+    .close-btn {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+    .hamburger {
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .hamburger:hover { transform: scale(1.1); }
+    @media (max-width: 768px) {
+      .mobile-menu-link { font-size: 1.5rem; }
+    }
+  </style>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sadek Development - Řidičský coaching</title>
 
-  <script>
-    document.documentElement.classList.add('js');
-  </script>
+  <script>document.documentElement.classList.add('js');</script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -105,10 +106,7 @@
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background:
         radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
@@ -127,20 +125,15 @@
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     }
-
     .glass-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
       transition: left 0.7s;
     }
-
     .glass-card:hover::before { left: 100%; }
-
     .glass-card:hover {
       transform: translateY(-12px) scale(1.02);
       border-color: rgba(0, 0, 0, 0.12);
@@ -153,7 +146,6 @@
       position: relative;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
-
     .img-premium::after {
       content: '';
       position: absolute;
@@ -163,18 +155,14 @@
       transition: opacity 0.5s;
       pointer-events: none;
     }
-
     .img-premium:hover::after { opacity: 1; }
-
     .img-premium img {
       transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       display: block;
     }
-
     .img-premium:hover img { transform: scale(1.08); }
 
     .js .reveal { opacity: 0; transform: translateY(40px); }
-
     .reveal.show {
       opacity: 1;
       transform: translateY(0);
@@ -183,11 +171,7 @@
 
     .text-depth { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
 
-    .accent-line {
-      position: relative;
-      padding-left: 24px;
-    }
-
+    .accent-line { position: relative; padding-left: 24px; }
     .accent-line::before {
       content: '';
       position: absolute;
@@ -202,7 +186,6 @@
     }
 
     nav { transition: all 0.3s ease; }
-
     .nav-scrolled {
       background: rgba(255, 255, 255, 0.85) !important;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -224,7 +207,6 @@
       transition: all 0.3s;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-
     .btn-glass:hover {
       background: rgba(255, 255, 255, 0.95);
       border-color: rgba(0, 0, 0, 0.15);
@@ -238,21 +220,6 @@
     }
     .float { animation: float 6s ease-in-out infinite; }
 
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #f8f7f5; }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #ef4444, #dc2626);
-      border-radius: 5px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #dc2626, #b91c1c);
-    }
-
-    .icon-wrapper {
-      background: linear-gradient(135deg, #ef4444, #f97316);
-      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25);
-    }
-
     /* Language selector styling (stejné jako v simulátoru) */
     .lang-btn {
       background: rgba(255, 255, 255, 0.1);
@@ -264,40 +231,55 @@
     }
     .lang-dropdown { z-index: 100; }
     .lang-option { font-size: 0.9rem; }
+
+    .icon-wrapper {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25);
+    }
   </style>
 </head>
 
 <body class="antialiased"
       x-data="pageApp()"
+      x-init="init()"
       @scroll.window="onScroll()"
-      @keydown.window.escape="close()">
+      @keydown.window.escape="close(); mobileMenuOpen = false">
 
-  <!-- Navigation -->
+  <!-- ✅ NAV (stejné jako ostatní stránky) -->
   <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
     <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="h-20 flex items-center justify-between">
+
           <a href="index.html" class="text-white font-bold text-xl tracking-tight z-50">
             Sadek Development
           </a>
-          <!-- Desktop Menu -->
+
+          <!-- Desktop menu -->
           <div class="hidden md:flex items-center gap-10 text-sm font-medium">
             <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.about"></a>
             <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.business"></a>
             <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.projects"></a>
             <a href="kontakty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.contact"></a>
+
             <!-- Desktop Language Selector -->
             <div class="relative" x-data="{ langOpen: false }">
-              <button @click="langOpen = !langOpen" class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
+              <button @click="langOpen = !langOpen"
+                      class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
                 </svg>
                 <span class="font-medium" x-text="currentLang.toUpperCase()"></span>
-                <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
-              <div x-show="langOpen" @click.away="langOpen = false"
+
+              <div x-cloak
+                   x-show="langOpen"
+                   @click.away="langOpen = false"
                    x-transition:enter="transition ease-out duration-200"
                    x-transition:enter-start="opacity-0 scale-95"
                    x-transition:enter-end="opacity-100 scale-100"
@@ -307,11 +289,15 @@
                    class="lang-dropdown absolute right-0 mt-3 w-40 origin-top-right"
                    style="display: none;">
                 <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 py-2 overflow-hidden">
-                  <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false" class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors" :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                  <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false"
+                     class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+                     :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
                     <span class="text-2xl">🇨🇿</span>
                     <span class="font-medium">Čeština</span>
                   </a>
-                  <a href="#" @click.prevent="switchLanguage('en'); langOpen = false" class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors" :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                  <a href="#" @click.prevent="switchLanguage('en'); langOpen = false"
+                     class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
+                     :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
                     <span class="text-2xl">🇬🇧</span>
                     <span class="font-medium">English</span>
                   </a>
@@ -319,7 +305,8 @@
               </div>
             </div>
           </div>
-          <!-- Hamburger -->
+
+          <!-- Mobile hamburger -->
           <button @click="mobileMenuOpen = true" class="md:hidden text-white hamburger z-50">
             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -329,41 +316,48 @@
       </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div x-show="mobileMenuOpen" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"
-         class="mobile-menu-overlay md:hidden"
-         style="display: none;">
-      <!-- Close Button -->
-      <button @click="mobileMenuOpen = false" class="close-btn">
-        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-      <!-- Menu Items -->
-      <nav class="flex flex-col items-center gap-2 mb-12">
-        <a href="index.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.about"></a>
-        <a href="oblasti-podnikani.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.business"></a>
-        <a href="projekty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.projects"></a>
-        <a href="kontakty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.contact"></a>
-      </nav>
-      <!-- Language Selector -->
-      <div class="flex gap-4">
-        <button @click="switchLanguage('cs'); mobileMenuOpen = false" class="mobile-lang-btn" :class="currentLang === 'cs' && 'active'">🇨🇿 Čeština</button>
-        <button @click="switchLanguage('en'); mobileMenuOpen = false" class="mobile-lang-btn" :class="currentLang === 'en' && 'active'">🇬🇧 English</button>
-      </div>
+    <!-- Progress bar -->
+    <div class="h-1 bg-black/5">
+      <div class="h-1 progress-bar transition-[width] duration-300 ease-out" :style="`width:${scrollPct}%`"></div>
     </div>
+  </nav>
 
-  <!-- Main Content -->
+  <!-- ✅ Mobile Menu Overlay (stejné jako ostatní stránky) -->
+  <div x-cloak
+       x-show="mobileMenuOpen"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="mobile-menu-overlay md:hidden"
+       style="display:none;">
+    <button @click="mobileMenuOpen = false" class="close-btn">
+      <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <nav class="flex flex-col items-center gap-2 mb-12">
+      <a href="index.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.about"></a>
+      <a href="oblasti-podnikani.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.business"></a>
+      <a href="projekty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.projects"></a>
+      <a href="kontakty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.contact"></a>
+    </nav>
+
+    <div class="flex gap-4">
+      <button @click="switchLanguage('cs'); mobileMenuOpen = false"
+              class="mobile-lang-btn" :class="currentLang === 'cs' && 'active'">🇨🇿 Čeština</button>
+      <button @click="switchLanguage('en'); mobileMenuOpen = false"
+              class="mobile-lang-btn" :class="currentLang === 'en' && 'active'">🇬🇧 English</button>
+    </div>
+  </div>
+
+  <!-- Main Content (ponecháno) -->
   <main class="relative pt-32 pb-20 min-h-screen">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-      <!-- Hero Title -->
       <div class="text-center mb-24 reveal">
         <div class="inline-block mb-6">
           <span class="text-red-500 text-sm font-semibold tracking-wider uppercase" x-text="t.badge"></span>
@@ -381,7 +375,7 @@
               <div class="img-premium">
                 <img src="fotky web sadek/IMG_8143.JPG"
                      alt="Toyota Supra"
-                     class="w-full h-[400px] object-cover" src="fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG">
+                     class="w-full h-[400px] object-cover">
               </div>
             </div>
           </button>
@@ -410,7 +404,7 @@
               <div class="img-premium">
                 <img src="fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG"
                      alt="Autodrom Most"
-                     class="w-full h-[400px] object-cover" src="fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG">
+                     class="w-full h-[400px] object-cover">
               </div>
             </div>
           </button>
@@ -425,7 +419,7 @@
               <div class="img-premium">
                 <img src="fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG"
                      alt="Spa-Francorchamps"
-                     class="w-full h-[400px] object-cover" src="fotky web sadek/IMG_8143.JPG">
+                     class="w-full h-[400px] object-cover">
               </div>
             </div>
           </button>
@@ -439,7 +433,7 @@
         </div>
       </div>
 
-      <!-- Coming Soon Notice (tvůj původní text, jen přepínaný) -->
+      <!-- Coming Soon -->
       <div class="reveal">
         <div class="glass-card p-12 text-center max-w-4xl mx-auto">
           <div class="w-16 h-16 mx-auto mb-6 rounded-full icon-wrapper flex items-center justify-center">
@@ -476,7 +470,8 @@
   </main>
 
   <!-- Lightbox -->
-  <div x-show="lbOpen"
+  <div x-cloak
+       x-show="lbOpen"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0"
        x-transition:enter-end="opacity-100"
@@ -485,7 +480,6 @@
        x-transition:leave-end="opacity-0"
        class="fixed inset-0 z-[100]"
        style="display:none;">
-
     <div class="absolute inset-0 lb-backdrop" @click="close()"></div>
 
     <div class="relative h-full flex items-center justify-center p-4">
@@ -496,7 +490,6 @@
            x-transition:leave="transition ease-in duration-200 transform"
            x-transition:leave-start="opacity-100 scale-100"
            x-transition:leave-end="opacity-0 scale-95">
-
         <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <div class="text-gray-600 text-sm">
             <span x-text="t.lightboxLabel"></span> <span x-text="lbIndex + 1"></span> / 3
@@ -528,7 +521,6 @@
   </div>
 
   <script>
-    // Translation data (stejný princip jako v simulátoru)
     const translations = {
       cs: {
         nav: { about: 'O nás', business: 'Oblasti podnikání', projects: 'Projekty', contact: 'Kontakty' },
@@ -550,9 +542,9 @@
         badge: 'Professional preparation',
         pageTitle: 'DRIVER COACHING',
         s1Title: 'Speed is not the goal.<br>Understanding is.',
-        s1Text: 'On the racing track, it\'s not just about how fast you take a corner, but how deeply you understand yourself, your car, and the physics of the moment.',
+        s1Text: "On the racing track, it's not just about how fast you take a corner, but how deeply you understand yourself, your car, and the physics of the moment.",
         s2Title: 'The path to mastery',
-        s2Text: 'Driver coaching on the circuit brings more than technique – it\'s a path to confidence, calm, and precision that emerge only when one learns to read the track as well as their own instincts.',
+        s2Text: "Driver coaching on the circuit brings more than technique – it's a path to confidence, calm, and precision that emerge only when one learns to read the track as well as their own instincts.",
         s3Title: 'Discover your limits',
         s3Text: 'In every lap you discover new limits. And you might find that the most important ones are not found on the asphalt.',
         comingTitle: 'In preparation',
@@ -562,7 +554,7 @@
       }
     };
 
-    // Reveal on scroll (stejné jako máš)
+    // Reveal on scroll
     (function(){
       const els = Array.from(document.querySelectorAll('.reveal'));
       if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('show')); return; }
@@ -579,15 +571,18 @@
         scrollPct: 0,
         scrolled: false,
         mobileMenuOpen: false,
+
         currentLang: 'cs',
         t: translations.cs,
+
         lbOpen: false,
         lbIndex: 0,
         images: [
+          "fotky web sadek/IMG_8143.JPG",
           "fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG",
-          "fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG",
-          "fotky web sadek/IMG_8143.JPG"
+          "fotky web sadek/BMracing_Most_18_4_25_sprint-06974.JPG"
         ],
+
         init() {
           const saved = localStorage.getItem('siteLanguage');
           if (saved && translations[saved]) {
@@ -595,13 +590,16 @@
             this.t = translations[saved];
             document.documentElement.lang = saved;
           }
+          this.onScroll();
         },
+
         switchLanguage(lang) {
           this.currentLang = lang;
           this.t = translations[lang];
           document.documentElement.lang = lang;
           localStorage.setItem('siteLanguage', lang);
         },
+
         onScroll(){
           const doc = document.documentElement;
           const st = doc.scrollTop || document.body.scrollTop;
@@ -609,6 +607,7 @@
           this.scrollPct = sh > 0 ? Math.min(100, Math.max(0, (st / sh) * 100)) : 0;
           this.scrolled = st > 50;
         },
+
         open(i){
           this.lbIndex = i;
           this.lbOpen = true;
