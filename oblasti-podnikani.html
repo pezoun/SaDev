@@ -1,6 +1,84 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+      <style>
+        .mobile-menu-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.95);
+          backdrop-filter: blur(20px);
+          z-index: 100;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .mobile-menu-link {
+          font-size: 1.75rem;
+          font-weight: 600;
+          color: white;
+          padding: 1rem 2rem;
+          transition: all 0.3s;
+          position: relative;
+        }
+        .mobile-menu-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: #ef4444;
+          transition: all 0.3s;
+          transform: translateX(-50%);
+        }
+        .mobile-menu-link:hover::after { width: 80%; }
+        .mobile-menu-link:hover { color: #ef4444; }
+        .mobile-lang-btn {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 0.75rem 1.5rem;
+          border-radius: 9999px;
+          color: white;
+          font-weight: 500;
+          transition: all 0.3s;
+        }
+        .mobile-lang-btn:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+        .mobile-lang-btn.active {
+          background: rgba(239, 68, 68, 0.2);
+          border-color: rgba(239, 68, 68, 0.4);
+          color: #ef4444;
+        }
+        .close-btn {
+          position: absolute;
+          top: 2rem;
+          right: 2rem;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s;
+          cursor: pointer;
+        }
+        .close-btn:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: rotate(90deg);
+        }
+        .hamburger {
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .hamburger:hover { transform: scale(1.1); }
+        @media (max-width: 768px) {
+          .mobile-menu-link { font-size: 1.5rem; }
+        }
+      </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sadek Development - Oblasti podnikání</title>
@@ -176,68 +254,88 @@
     <!-- Navigation -->
     <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
         <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="h-20 flex items-center justify-between">
-                    <a href="index.html" class="text-white font-bold text-xl tracking-tight">
-                        Sadek Development
-                    </a>
-                    
-                    <div class="hidden md:flex items-center gap-10 text-sm font-medium">
-                        <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.about">
-                        </a>
-                        <a href="oblasti-podnikani.html" class="text-white hover:text-white transition-colors duration-300" x-text="t.nav.business">
-                        </a>
-                        <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.projects">
-                        </a>
-                        <a href="#contact" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.contact">
-                        </a>
-                        <div class="relative" x-data="{ langOpen: false }">
-                            <button @click="langOpen = !langOpen" 
-                                    class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-                                </svg>
-                                <span class="font-medium" x-text="currentLang.toUpperCase()"></span>
-                                <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                </svg>
-                            </button>
-                            
-                            <div x-show="langOpen" 
-                                 @click.away="langOpen = false"
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 scale-95"
-                                 x-transition:enter-end="opacity-100 scale-100"
-                                 x-transition:leave="transition ease-in duration-150"
-                                 x-transition:leave-start="opacity-100 scale-100"
-                                 x-transition:leave-end="opacity-0 scale-95"
-                                 class="lang-dropdown absolute right-0 mt-3 w-40 origin-top-right"
-                                 style="display: none;">
-                                <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 py-2 overflow-hidden">
-                                    <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false" 
-                                       class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
-                                       :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
-                                        <span class="text-2xl">🇨🇿</span>
-                                        <span class="font-medium">Čeština</span>
-                                    </a>
-                                    <a href="#" @click.prevent="switchLanguage('en'); langOpen = false" 
-                                       class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors"
-                                       :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
-                                        <span class="text-2xl">🇬🇧</span>
-                                        <span class="font-medium">English</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+          <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="h-20 flex items-center justify-between">
+              <a href="index.html" class="text-white font-bold text-xl tracking-tight z-50">
+                Sadek Development
+              </a>
+              <!-- Desktop Menu -->
+              <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+                <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.about"></a>
+                <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.business"></a>
+                <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.projects"></a>
+                <a href="kontakty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.contact"></a>
+                <!-- Desktop Language Selector -->
+                <div class="relative" x-data="{ langOpen: false }">
+                  <button @click="langOpen = !langOpen" class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                    </svg>
+                    <span class="font-medium" x-text="currentLang.toUpperCase()"></span>
+                    <svg class="w-4 h-4 transition-transform duration-300" :class="langOpen && 'rotate-180'" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </button>
+                  <div x-show="langOpen" @click.away="langOpen = false"
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 scale-95"
+                       x-transition:enter-end="opacity-100 scale-100"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 scale-100"
+                       x-transition:leave-end="opacity-0 scale-95"
+                       class="lang-dropdown absolute right-0 mt-3 w-40 origin-top-right"
+                       style="display: none;">
+                    <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 py-2 overflow-hidden">
+                      <a href="#" @click.prevent="switchLanguage('cs'); langOpen = false" class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors" :class="currentLang === 'cs' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                        <span class="text-2xl">🇨🇿</span>
+                        <span class="font-medium">Čeština</span>
+                      </a>
+                      <a href="#" @click.prevent="switchLanguage('en'); langOpen = false" class="lang-option flex items-center gap-3 px-4 py-3 hover:bg-gray-100 transition-colors" :class="currentLang === 'en' ? 'text-gray-900 font-semibold' : 'text-gray-700'">
+                        <span class="text-2xl">🇬🇧</span>
+                        <span class="font-medium">English</span>
+                      </a>
                     </div>
-
-                    <button class="md:hidden text-white">
-                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
+                  </div>
                 </div>
+              </div>
+              <!-- Hamburger -->
+              <button @click="mobileMenuOpen = true" class="md:hidden text-white hamburger z-50">
+                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+              </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="mobile-menu-overlay md:hidden"
+             style="display: none;">
+          <!-- Close Button -->
+          <button @click="mobileMenuOpen = false" class="close-btn">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+          <!-- Menu Items -->
+          <nav class="flex flex-col items-center gap-2 mb-12">
+            <a href="index.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.about"></a>
+            <a href="oblasti-podnikani.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.business"></a>
+            <a href="projekty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.projects"></a>
+            <a href="kontakty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.contact"></a>
+          </nav>
+          <!-- Language Selector -->
+          <div class="flex gap-4">
+            <button @click="switchLanguage('cs'); mobileMenuOpen = false" class="mobile-lang-btn" :class="currentLang === 'cs' && 'active'">🇨🇿 Čeština</button>
+            <button @click="switchLanguage('en'); mobileMenuOpen = false" class="mobile-lang-btn" :class="currentLang === 'en' && 'active'">🇬🇧 English</button>
+          </div>
         </div>
     </nav>
 
@@ -392,6 +490,7 @@
         function pageApp(){
           return {
             scrolled: false,
+            mobileMenuOpen: false,
             currentLang: 'cs',
             t: translations.cs,
             
