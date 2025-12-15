@@ -2,6 +2,31 @@
 <html lang="cs">
 <head>
       <style>
+                .nav-link {
+                  position: relative;
+                  color: #fff;
+                  transition: color 0.3s;
+                  text-decoration: none;
+                }
+                .nav-link::after {
+                  content: '';
+                  position: absolute;
+                  left: 50%;
+                  bottom: -2px;
+                  transform: translateX(-50%);
+                  width: 0;
+                  height: 2px;
+                  background: linear-gradient(90deg, #fff, #e5e7eb);
+                  border-radius: 2px;
+                  transition: width 0.3s;
+                }
+                .nav-link:hover::after,
+                .nav-link.active::after {
+                  width: 80%;
+                }
+                .nav-link.active {
+                  color: inherit;
+                }
         .mobile-menu-overlay {
           position: fixed;
           inset: 0;
@@ -261,10 +286,10 @@
               </a>
               <!-- Desktop Menu -->
               <div class="hidden md:flex items-center gap-10 text-sm font-medium">
-                <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.about"></a>
-                <a href="oblasti-podnikani.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.business"></a>
-                <a href="projekty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.projects"></a>
-                <a href="kontakty.html" class="text-white/80 hover:text-white transition-colors duration-300" x-text="t.nav.contact"></a>
+                <a href="index.html" class="nav-link" x-text="t.nav.about"></a>
+                <a href="oblasti-podnikani.html" class="nav-link active" x-text="t.nav.business"></a>
+                <a href="projekty.html" class="nav-link" x-text="t.nav.projects"></a>
+                <a href="kontakty.html" class="nav-link" x-text="t.nav.contact"></a>
                 <!-- Desktop Language Selector -->
                 <div class="relative" x-data="{ langOpen: false }">
                   <button @click="langOpen = !langOpen" class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
