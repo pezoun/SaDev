@@ -14,465 +14,493 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 
   <style>
-    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+* { 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+}
 
-    /* Sophisticated light background with subtle patterns */
-    body {
-      background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
-      position: relative;
-      overflow-x: hidden;
-    }
-    
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
+html { 
+  scroll-behavior: smooth; 
+}
 
-    /* Navigation */
-    nav {
-      transition: all 0.3s ease;
-    }
-    .nav-link {
-      position: relative;
-      color: #fff;
-      transition: color 0.3s;
-      text-decoration: none;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: -2px;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #fff, #e5e7eb);
-      border-radius: 2px;
-      transition: width 0.3s;
-    }
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 80%;
-    }
-    .nav-link.active {
-      color: inherit;
-    }
-    .nav-scrolled {
-      background: rgba(255, 255, 255, 0.85) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
+/* Sophisticated light background with subtle patterns */
+body {
+  background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
+  position: relative;
+  overflow-x: hidden;
+}
 
-    /* Hero slider enhancement */
-    .hero-image {
-      will-change: transform;
-    }
-    
-    .hero-overlay {
-      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
-    }
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
 
-    /* Slider controls */
-    .slider-btn {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s;
-    }
-    
-    .slider-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: scale(1.1);
-    }
+/* Navigation */
+nav {
+  transition: all 0.3s ease;
+}
 
-    /* Reveal animations */
-    .js .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+.nav-link {
+  position: relative;
+  color: #fff;
+  transition: color 0.3s;
+  text-decoration: none;
+}
 
-    /* Glass card for intro section */
-    .glass-intro {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 32px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-    }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, #e5e7eb);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
 
-    /* Business area cards - Apple style with hover */
-    .business-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .business-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
-      z-index: 1;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .business-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
-    
-    .business-card:hover::before {
-      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%);
-    }
-    
-    .business-card img {
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .business-card:hover img {
-      transform: scale(1.08);
-    }
-    
-    .business-card-content {
-      position: relative;
-      z-index: 2;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .business-card:hover .business-card-content {
-      transform: translateY(-4px);
-    }
-    
-    .business-card .accent-underline {
-      width: 16px;
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .business-card:hover .accent-underline {
-      width: 48px;
-    }
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
 
-    /* Project cards - Apple style */
-    .project-card {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
-      position: relative;
-      background: white;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .project-card:hover {
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
-      transform: translateY(-4px);
-    }
-    
-    .project-info-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(40px) saturate(180%);
-      -webkit-backdrop-filter: blur(40px) saturate(180%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    
-    .project-info-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    .info-btn {
-      position: absolute;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 5;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 0.5px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-    
-    .info-btn:hover {
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 0, 0, 0.12);
-      transform: translateY(-1px);
-    }
-    
-    .info-btn:active {
-      transform: translateY(0);
-    }
-    
-    .close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-    
-    .close-btn:hover {
-      background: rgba(0, 0, 0, 0.1);
-      transform: scale(1.1);
-    }
+.nav-link.active {
+  color: inherit;
+}
 
-    /* Language selector styling */
-    .lang-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    .lang-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-    
-    .lang-dropdown {
-      z-index: 100;
-    }
-    
-    .lang-option {
-      font-size: 0.9rem;
-    }
+.nav-scrolled {
+  background: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f8f7f5;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #ef4444, #dc2626);
-      border-radius: 5px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #dc2626, #b91c1c);
-    }
+/* Hero slider enhancement */
+.hero-image {
+  will-change: transform;
+}
 
-    /* Section title styling */
-    .section-title {
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      letter-spacing: -0.02em;
-    }
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
+}
 
-    /* Floating animation */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    
-    .float-slow {
-      animation: float 8s ease-in-out infinite;
-    }
+/* Parallax background behind hero slideshow */
+.hero-wrapper {
+  background-image: url("./fotky%20web%20sadek/aboutBackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
-    /* Status badge - Apple style */
-    .status-badge {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 0.5px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
+/* Mobile fallback (fixed backgrounds can be janky on iOS/Android) */
+@media (max-width: 768px) {
+  .hero-wrapper { 
+    background-attachment: scroll; 
+  }
+}
 
-    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+/* Let the parallax background slightly show through the slideshow photos */
+.hero-image {
+  opacity: 0.92;
+}
 
-    body {
-      background: linear-gradient(135deg, #fdfcfb 0%, #f8f7f5 50%, #faf9f7 100%);
-      position: relative;
-      overflow-x: hidden;
-    }
+/* Slider controls */
+.slider-btn {
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s;
+}
 
-    nav { transition: all 0.3s ease; }
-    
-    .nav-scrolled {
-      background: rgba(255, 255, 255, 0.85) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
+.slider-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
 
-    /* Mobile menu overlay */
-    .mobile-menu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(20px);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+/* Reveal animations */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
 
-    .mobile-menu-link {
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: white;
-      padding: 1rem 2rem;
-      transition: all 0.3s;
-      position: relative;
-    }
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .mobile-menu-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: #ef4444;
-      transition: all 0.3s;
-      transform: translateX(-50%);
-    }
+/* Glass card for intro section */
+.glass-intro {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
 
-    .mobile-menu-link:hover::after {
-      width: 80%;
-    }
+/* Business area cards - Apple style with hover */
+.business-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .mobile-menu-link:hover {
-      color: #ef4444;
-    }
+.business-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    /* Language button in mobile */
-    .mobile-lang-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.75rem 1.5rem;
-      border-radius: 9999px;
-      color: white;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
+.business-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.12);
+}
 
-    .mobile-lang-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
+.business-card:hover::before {
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.7) 100%);
+}
 
-    .mobile-lang-btn.active {
-      background: rgba(239, 68, 68, 0.2);
-      border-color: rgba(239, 68, 68, 0.4);
-      color: #ef4444;
-    }
+.business-card img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    /* Desktop language selector */
-    .lang-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    .lang-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-    
-    .lang-dropdown { z-index: 100; }
-    .lang-option { font-size: 0.9rem; }
+.business-card:hover img {
+  transform: scale(1.08);
+}
 
-    /* Close button animation */
-    .close-btn {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
+.business-card-content {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .close-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: rotate(90deg);
-    }
+.business-card:hover .business-card-content {
+  transform: translateY(-4px);
+}
 
-    /* Hamburger animation */
-    .hamburger {
-      cursor: pointer;
-      transition: all 0.3s;
-    }
+.business-card .accent-underline {
+  width: 16px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .hamburger:hover {
-      transform: scale(1.1);
-    }
+.business-card:hover .accent-underline {
+  width: 48px;
+}
 
-    @media (max-width: 768px) {
-      .mobile-menu-link {
-        font-size: 1.5rem;
-      }
-    }
+/* Project cards - Professional minimalist style */
+.project-card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  position: relative;
+  background: white;
+}
+
+.project-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-info-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.project-info-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.info-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.info-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+/* Mobile menu close button */
+.mobile-menu-overlay .close-btn {
+  top: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-overlay .close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Language selector styling */
+.lang-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.lang-dropdown {
+  z-index: 100;
+}
+
+.lang-option {
+  font-size: 0.9rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f7f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #dc2626, #b91c1c);
+}
+
+/* Progress bar */
+.progress-bar {
+  background: linear-gradient(90deg, #ef4444, #f97316, #eab308);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Section title styling */
+.section-title {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  letter-spacing: -0.02em;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Status badge - Apple style */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.status-badge.progress {
+  background: rgba(59, 130, 246, 0.6);
+  color: rgb(255, 255, 255);
+}
+
+.status-badge.completed {
+  background: rgba(34, 197, 94, 0.6);
+  color: rgb(255, 255, 255);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-badge.progress .status-indicator {
+  background: rgb(59, 130, 246);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-badge.completed .status-indicator {
+  background: rgb(34, 197, 94);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-link {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
+  padding: 1rem 2rem;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.mobile-menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #ef4444;
+  transition: all 0.3s;
+  transform: translateX(-50%);
+}
+
+.mobile-menu-link:hover::after {
+  width: 80%;
+}
+
+.mobile-menu-link:hover {
+  color: #ef4444;
+}
+
+/* Language button in mobile */
+.mobile-lang-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.mobile-lang-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-lang-btn.active {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+/* Hamburger animation */
+.hamburger {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-link {
+    font-size: 1.5rem;
+  }
+}
   </style>
 </head>
 
-<body class="text-gray-800 antialiased"
+<body class="text-gray-800 antialiased index-page"
       x-data="pageApp()"
       @scroll.window="onScroll()">
-  
-  <!-- Navigation -->
-  <body class="antialiased" x-data="pageApp()" @scroll.window="onScroll()">
-  
+
+  <!-- Parallax Background -->
+  <div class="absolute inset-0 -z-10 hero-wrapper"></div>
+
   <!-- Navigation -->
   <nav class="fixed inset-x-0 top-0 z-50" :class="scrolled && 'nav-scrolled'">
     <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="h-20 flex items-center justify-between">
-          <a href="index.html" class="text-white font-bold text-xl tracking-tight z-50">
-            Sadek Development
+          <a href="index.html" class="text-white text-2xl font-bold tracking-tight z-50 company-name">
+            <span x-text="t.nav.companyName"></span>
           </a>
 
-          <!-- Desktop Menu -->
-          <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+          <div class="hidden md:flex items-center gap-10 font-medium">
             <a href="index.html" class="nav-link active" x-text="t.nav.about"></a>
-            <a href="oblasti-podnikani.html" class="nav-link" x-text="t.nav.business"></a>
+            <a href="#business-areas" class="nav-link" x-text="t.nav.business"></a>
             <a href="projekty.html" class="nav-link" x-text="t.nav.projects"></a>
             <a href="kontakty.html" class="nav-link" x-text="t.nav.contact"></a>
             
-            <!-- Desktop Language Selector -->
             <div class="relative" x-data="{ langOpen: false }">
               <button @click="langOpen = !langOpen" class="lang-btn text-white/80 hover:text-white flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -506,7 +534,6 @@
             </div>
           </div>
 
-          <!-- Mobile Hamburger -->
           <button @click="mobileMenuOpen = true" class="md:hidden text-white hamburger z-50">
             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -515,49 +542,11 @@
         </div>
       </div>
     </div>
-  </nav>
-
-  <!-- Mobile Menu Overlay -->
-  <div x-show="mobileMenuOpen" 
-       x-transition:enter="transition ease-out duration-300"
-       x-transition:enter-start="opacity-0"
-       x-transition:enter-end="opacity-100"
-       x-transition:leave="transition ease-in duration-200"
-       x-transition:leave-start="opacity-100"
-       x-transition:leave-end="opacity-0"
-       class="mobile-menu-overlay md:hidden"
-       style="display: none;">
     
-    <!-- Close Button -->
-    <button @click="mobileMenuOpen = false" class="close-btn">
-      <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-
-    <!-- Menu Items -->
-    <nav class="flex flex-col items-center gap-2 mb-12">
-      <a href="index.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.about"></a>
-      <a href="oblasti-podnikani.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.business"></a>
-      <a href="projekty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.projects"></a>
-      <a href="kontakty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.contact"></a>
-    </nav>
-
-    <!-- Language Selector -->
-    <div class="flex gap-4">
-      <button @click="switchLanguage('cs'); mobileMenuOpen = false" 
-              class="mobile-lang-btn"
-              :class="currentLang === 'cs' && 'active'">
-        🇨🇿 Čeština
-      </button>
-      <button @click="switchLanguage('en'); mobileMenuOpen = false" 
-              class="mobile-lang-btn"
-              :class="currentLang === 'en' && 'active'">
-        🇬🇧 English
-      </button>
+    <div class="h-1 bg-black/5">
+        <div class="h-1 progress-bar transition-[width] duration-300 ease-out" :style="`width:${scrollPct}%`"></div>
     </div>
-  </div>
-
+  </nav>
 
   <!-- Hero Slider -->
   <section class="pt-20 reveal" x-data="{
@@ -632,7 +621,7 @@
   </section>
 
   <!-- Business Areas -->
-  <section class="py-20 sm:py-24 relative">
+  <section id="business-areas" class="py-20 sm:py-24 relative">
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
       <div class="reveal text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title" x-text="t.businessAreas.title">
@@ -654,7 +643,7 @@
         </div>
         
         <div class="reveal">
-          <a href="edukace-coaching.html" class="business-card block h-80 md:h-96">
+          <a href="oblasti-podnikani.html" class="business-card block h-80 md:h-96">
               <img src="fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG" 
                 alt="Edukace" 
                 class="w-full h-full object-cover">
@@ -669,7 +658,6 @@
     </div>
   </section>
 
-  <!-- Projects -->
   <section class="py-20 sm:py-24 relative">
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
       <div class="reveal text-center mb-16">
@@ -677,23 +665,117 @@
         </h2>
       </div>
       
-      <div class="grid md:grid-cols-3 gap-10">
-        <!-- Project 1 -->
+      <style>
+        .project-card {
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          background: white;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+          transform: scale(1.02);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image-wrapper {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .project-card img {
+          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover img {
+          transform: scale(1.05);
+        }
+        
+        .project-card::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          padding: 2px;
+          background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(59, 130, 246, 0.3));
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+        
+        .project-card:hover::after {
+          opacity: 1;
+        }
+        
+        .project-content {
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover .project-content {
+          transform: translateY(-4px);
+        }
+        
+        .info-btn {
+          position: absolute;
+          bottom: 1.5rem;
+          right: 1.5rem;
+          z-index: 5;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(20px);
+          border: 0.5px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          font-weight: 500;
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        
+        .project-card:hover .info-btn {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .info-btn:hover {
+          background: rgba(255, 255, 255, 1);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+          transform: translateY(-2px);
+        }
+        
+        .status-badge {
+          backdrop-filter: blur(20px);
+          transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .status-badge {
+          transform: scale(1.05);
+        }
+      </style>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+        <!-- Project 1 - Bydlení Kozlovice -->
         <div class="reveal">
-          <div class="project-card bg-white" x-data="{showInfo: false}">
-            <div class="relative">
-              <span class="status-badge absolute top-4 left-4 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-900" x-text="t.projects.statusOngoing">
-              </span>
+          <div class="project-card" x-data="{showInfo: false}">
+            <div class="relative project-image-wrapper">
+              <div class="status-badge progress absolute top-4 left-4 z-10">
+                <span class="status-indicator"></span>
+                <span x-text="t.projects.statusOngoing"></span>
+              </div>
               <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
               </button>
               <div class="overflow-hidden">
                 <img src="fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG" 
-                     alt="Vila Kunice" 
-                     class="w-full h-64 md:h-72 object-cover" src="fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG">
+                     alt="Bydlení Kozlovice" 
+                     class="w-full h-72 lg:h-80 object-cover">
               </div>
             </div>
-            <div class="p-6 text-center">
-              <p class="text-sm font-medium text-gray-700" x-text="t.projects.project1.location"></p>
+            <div class="p-6 md:p-8 project-content">
+              <h3 class="text-xl font-bold text-gray-900 mb-2" x-text="t.projects.project1.name"></h3>
+              <p class="text-sm text-gray-600 mb-3" x-text="t.projects.project1.location"></p>
+              <p class="text-sm text-gray-700 leading-relaxed" x-text="t.projects.project1.preview"></p>
             </div>
             
             <!-- Info Overlay -->
@@ -707,30 +789,33 @@
                 <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project1.name"></h4>
                 <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project1.description"></p>
                 <div class="pt-3 space-y-1.5 text-sm text-gray-600">
-                  <p class="font-medium"><span x-text="t.projects.area"></span>: <span class="text-gray-900">250 m²</span></p>
-                  <p class="font-medium"><span x-text="t.projects.rooms"></span>: <span class="text-gray-900">5+1</span></p>
+                  <p class="font-medium">0+kk až 3+kk</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         
-        <!-- Project 2 -->
+        <!-- Project 2 - Vila Tichá -->
         <div class="reveal">
-          <div class="project-card bg-white" x-data="{showInfo: false}">
-            <div class="relative">
-              <span class="status-badge absolute top-4 left-4 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-900" x-text="t.projects.statusOngoing">
-              </span>
+          <div class="project-card" x-data="{showInfo: false}">
+            <div class="relative project-image-wrapper">
+              <div class="status-badge progress absolute top-4 left-4 z-10">
+                <span class="status-indicator"></span>
+                <span x-text="t.projects.statusOngoing"></span>
+              </div>
               <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
               </button>
               <div class="overflow-hidden">
-                <img src="fotky web sadek/66b78520-f1e3-4bf0-b83c-632a5dcde9d5.JPG" 
-                     alt="Vila Kunice" 
-                     class="w-full h-64 md:h-72 object-cover" src="fotky web sadek/66b78520-f1e3-4bf0-b83c-632a5dcde9d5.JPG">
+                <img src="fotky web sadek/IMG_8263.JPG" 
+                     alt="Vila Tichá" 
+                     class="w-full h-72 lg:h-80 object-cover">
               </div>
             </div>
-            <div class="p-6 text-center">
-              <p class="text-sm font-medium text-gray-700" x-text="t.projects.project2.location"></p>
+            <div class="p-6 md:p-8 project-content">
+              <h3 class="text-xl font-bold text-gray-900 mb-2" x-text="t.projects.project2.name"></h3>
+              <p class="text-sm text-gray-600 mb-3" x-text="t.projects.project2.location"></p>
+              <p class="text-sm text-gray-700 leading-relaxed" x-text="t.projects.project2.preview"></p>
             </div>
             
             <!-- Info Overlay -->
@@ -743,48 +828,6 @@
               <div class="text-center space-y-4 max-w-xs" @click.stop>
                 <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project2.name"></h4>
                 <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project2.description"></p>
-                <div class="pt-3 space-y-1.5 text-sm text-gray-600">
-                  <p class="font-medium"><span x-text="t.projects.area"></span>: <span class="text-gray-900">280 m²</span></p>
-                  <p class="font-medium"><span x-text="t.projects.rooms"></span>: <span class="text-gray-900">6+1</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 3 -->
-        <div class="reveal">
-          <div class="project-card bg-white" x-data="{showInfo: false}">
-            <div class="relative">
-              <span class="status-badge absolute top-4 left-4 px-4 py-2.5 rounded-full text-xs font-semibold text-gray-900" x-text="t.projects.statusCompleted">
-              </span>
-              <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
-              </button>
-              <div class="overflow-hidden">
-                <img src="fotky web sadek/IMG_8263.JPG" 
-                     alt="Vila Kunice" 
-                     class="w-full h-64 md:h-72 object-cover" src="fotky web sadek/840d5598-f950-4ae7-ae6a-698c2c0682a6.JPG">
-              </div>
-            </div>
-            <div class="p-6 text-center">
-              <p class="text-sm font-medium text-gray-700" x-text="t.projects.project3.location"></p>
-            </div>
-            
-            <!-- Info Overlay -->
-            <div class="project-info-overlay" :class="showInfo && 'active'">
-              <button @click.stop="showInfo = false" class="close-btn">
-                <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-              </button>
-              <div class="text-center space-y-4 max-w-xs" @click.stop>
-                <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project3.name"></h4>
-                <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project3.description"></p>
-                <div class="pt-3 space-y-1.5 text-sm text-gray-600">
-                  <p class="font-medium"><span x-text="t.projects.area"></span>: <span class="text-gray-900">220 m²</span></p>
-                  <p class="font-medium"><span x-text="t.projects.rooms"></span>: <span class="text-gray-900">4+1</span></p>
-                  <p class="font-medium"><span x-text="t.projects.completed"></span>: <span class="text-gray-900">2024</span></p>
-                </div>
               </div>
             </div>
           </div>
@@ -817,7 +860,8 @@
           about: 'O nás',
           business: 'Oblasti podnikání',
           projects: 'Projekty',
-          contact: 'Kontakty'
+          contact: 'Kontakty',
+          companyName: 'Šádek Development'
         },
         slider: {
           prev: 'Předchozí',
@@ -843,19 +887,16 @@
           rooms: 'Pokoje',
           completed: 'Dokončeno',
           project1: {
-            name: 'Vila Kunice',
-            location: 'Vila / Kunice pod Ondřejníkem',
-            description: 'Moderní vila s výhledem na Ondřejník. Dokončení plánováno na Q2 2025.'
+          name: 'Bydlení Kozlovice',
+          location: 'Bydlení / Kozlovice',
+          preview: 'Rezidenční projekt s důrazem na kvalitní a pohodové bydlení.',
+          description: 'Připravujeme menší rezidenční projekt, který je navržen s důrazem na pohodové a kvalitní bydlení. Cílem je vytvořit místo, kde se dobře žije dnes i za mnoho let – bez zbytečných kompromisů v dispozicích, provedení i celkovém pojetí.'
           },
           project2: {
-            name: 'Vila Kunice',
-            location: 'Vila / Kunice pod Ondřejníkem',
-            description: 'Moderní vila s výhledem na Ondřejník. Dokončení plánováno na Q3 2025.'
-          },
-          project3: {
-            name: 'Vila Kunice',
-            location: 'Vila / Kunice pod Ondřejníkem',
-            description: 'Dokončený projekt s moderním designem a udržitelným řešením.'
+            name: 'Vila Tichá',
+            location: 'Vila / Čeladná',
+            preview: 'Nadstandardní bydlení v Beskydech s respektem k přírodě.',
+            description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.'
           }
         }
       },
@@ -864,7 +905,8 @@
           about: 'About Us',
           business: 'Business Areas',
           projects: 'Projects',
-          contact: 'Contact'
+          contact: 'Contact',
+          companyName: 'Sadek Development'
         },
         slider: {
           prev: 'Previous',
@@ -903,6 +945,11 @@
             name: 'Kunice Villa',
             location: 'Villa / Kunice pod Ondřejníkem',
             description: 'Completed project with modern design and sustainable solution.'
+          },
+          project4: {
+            name: 'Kozlovice Housing',
+            location: 'Housing / Kozlovice',
+            description: 'We are preparing a smaller residential project designed with emphasis on comfortable and quality living. The goal is to create a place where it is good to live today and for many years to come - without unnecessary compromises in layouts, execution and overall concept.'
           }
         }
       }
@@ -928,6 +975,7 @@
 
     function pageApp(){
       return {
+        scrollPct: 0,
         scrolled: false,
         mobileMenuOpen: false, // ← přidáno pro hamburger menu
         currentLang: 'cs',
@@ -941,6 +989,8 @@
             this.t = translations[saved];
             document.documentElement.lang = saved;
           }
+          // Update page title with company name
+          document.title = this.t.nav.companyName + ' - Hlavní stránka';
         },
 
         switchLanguage(lang) {
@@ -951,7 +1001,10 @@
         },
 
         onScroll(){
-          const st = document.documentElement.scrollTop || document.body.scrollTop;
+          const doc = document.documentElement;
+          const st = doc.scrollTop || document.body.scrollTop;
+          const sh = doc.scrollHeight - doc.clientHeight;
+          this.scrollPct = sh > 0 ? Math.min(100, Math.max(0, (st / sh) * 100)) : 0;
           this.scrolled = st > 50;
         }
       }

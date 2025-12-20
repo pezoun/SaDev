@@ -286,26 +286,6 @@
           background: linear-gradient(180deg, #dc2626, #b91c1c);
         }
 
-        /* Footer enhancement */
-        .footer-gradient {
-          background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%);
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .footer-gradient::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: 
-            radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
-          pointer-events: none;
-        }
-
         /* Floating animation for content */
         @keyframes float {
           0%, 100% { transform: translateY(0); }
@@ -316,9 +296,10 @@
           animation: float 8s ease-in-out infinite;
         }
     </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="antialiased"
+<body class="antialiased simulator-page"
       x-data="pageApp()"
       @scroll.window="onScroll()">
     
@@ -327,8 +308,8 @@
         <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
           <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="h-20 flex items-center justify-between">
-              <a href="index.html" class="text-white font-bold text-xl tracking-tight z-50">
-                Sadek Development
+              <a href="index.html" class="text-white font-bold text-2xl tracking-tight z-50">
+                <span x-text="t.nav.companyName"></span>
               </a>
               <!-- Desktop Menu -->
               <div class="hidden md:flex items-center gap-10 text-sm font-medium">
@@ -520,25 +501,19 @@
     </section>
 
     <!-- Footer -->
-    <footer id="kontakty" class="footer-gradient text-white py-20 relative reveal">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center space-y-6">
-                <div class="inline-block">
-                    <h3 class="text-3xl font-bold mb-2">Sadek Development s.r.o.</h3>
-                    <div class="w-16 h-1 mx-auto bg-gradient-to-r from-red-500 to-orange-500 rounded-full"></div>
-                </div>
-                
-                <div class="space-y-2 text-gray-300 text-lg">
-                    <p>Babická 2379/1a</p>
-                    <p>Praha</p>
-                    <p>148 00</p>
-                </div>
-                
-                <div class="pt-8 border-t border-white/10 mt-8">
-                    <p class="text-gray-400 text-sm" x-text="t.copyright"></p>
-                </div>
+    <footer id="contact" class="py-16 relative">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="reveal">
+          <div class="border-t border-gray-300 pt-12">
+            <div class="text-left space-y-3 text-gray-700">
+              <div class="font-bold text-lg text-gray-900">Sadek Development s.r.o.</div>
+              <div>Babická 2379/1a</div>
+              <div>Praha</div>
+              <div>148 00</div>
             </div>
+          </div>
         </div>
+      </div>
     </footer>
 
     <script>
@@ -549,21 +524,23 @@
                     about: 'O nás',
                     business: 'Oblasti podnikání',
                     projects: 'Projekty',
-                    contact: 'Kontakty'
+                    contact: 'Kontakty',
+                    companyName: 'Šádek Development'
                 },
                 heroTitle: 'TRÉNINK NA SIMULÁTORU',
                 quote: 'Rychlost není cílem. Cílem je porozumění.',
                 paragraph1: 'Na závodní trati nejde jen o to, jak rychle projedete zatáčku, ale jak hluboce rozumíte sobě, svému vozu a fyzice okamžiku.',
                 paragraph2: 'Řidičský coaching na okruhu přináší víc než techniku – je to cesta k jistotě, klidu a přesnosti, které vznikají až tehdy, kdy se člověk naučí číst trať stejně jako vlastní instinkty.',
                 paragraph3: 'V každém kole objevujete nové hranice. A možná zjistíte, že ty nejdůležitější se nenacházejí na asfaltu.',
-                copyright: '© 2024 Sadek Development. Všechna práva vyhrazena.'
+                copyright: '© 2024 Šádek Development. Všechna práva vyhrazena.'
             },
             en: {
                 nav: {
                     about: 'About Us',
                     business: 'Business Areas',
                     projects: 'Projects',
-                    contact: 'Contact'
+                    contact: 'Contact',
+                    companyName: 'Sadek Development'
                 },
                 heroTitle: 'SIMULATOR TRAINING',
                 quote: 'Speed is not the goal. Understanding is.',

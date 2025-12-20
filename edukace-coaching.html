@@ -4,7 +4,7 @@
   <style>
         .nav-link {
           position: relative;
-          color: #fff;
+          color: #110909;
           transition: color 0.3s;
           text-decoration: none;
         }
@@ -261,10 +261,29 @@
       background: linear-gradient(135deg, #ef4444, #f97316);
       box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25);
     }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f8f7f5;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #ef4444, #dc2626);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #dc2626, #b91c1c);
+    }
   </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="antialiased"
+<body class="antialiased coaching-page"
       x-data="pageApp()"
       x-init="init()"
       @scroll.window="onScroll()"
@@ -276,8 +295,8 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="h-20 flex items-center justify-between">
 
-          <a href="index.html" class="text-white font-bold text-xl tracking-tight z-50">
-            Sadek Development
+          <a href="index.html" class="text-white font-bold text-2xl tracking-tight z-50">
+            <span x-text="t.nav.companyName"></span>
           </a>
 
           <!-- Desktop menu -->
@@ -384,9 +403,7 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
       <div class="text-center mb-24 reveal">
-        <div class="inline-block mb-6">
-          <span class="text-red-500 text-sm font-semibold tracking-wider uppercase" x-text="t.badge"></span>
-        </div>
+        
         <h1 class="text-5xl md:text-7xl font-black mb-6 text-gray-900 text-depth" style="letter-spacing: -0.02em;"
             x-text="t.pageTitle"></h1>
         <div class="w-24 h-1 mx-auto bg-gradient-to-r from-red-500 to-orange-500 rounded-full shadow-lg"></div>
@@ -548,7 +565,7 @@
   <script>
     const translations = {
       cs: {
-        nav: { about: 'O nás', business: 'Oblasti podnikání', projects: 'Projekty', contact: 'Kontakty' },
+        nav: { about: 'O nás', business: 'Oblasti podnikání', projects: 'Projekty', contact: 'Kontakty', companyName: 'Šádek Development' },
         badge: 'Profesionální příprava',
         pageTitle: 'ŘIDIČSKÝ COACHING',
         s1Title: 'Rychlost není cílem.<br>Cílem je porozumění.',
@@ -560,10 +577,10 @@
         comingTitle: 'Ve fázi příprav',
         comingText: 'Oblast řidičského coachingu je aktuálně ve fázi příprav. Intenzivně pracujeme na koncepci a obsahu tak, aby mohla v brzké době nabídnout profesionální a prakticky zaměřené služby.',
         lightboxLabel: 'Obrázek',
-        copyright: '© 2024 Sadek Development. Všechna práva vyhrazena.'
+        copyright: '© 2024 Šádek Development. Všechna práva vyhrazena.'
       },
       en: {
-        nav: { about: 'About Us', business: 'Business Areas', projects: 'Projects', contact: 'Contact' },
+        nav: { about: 'About Us', business: 'Business Areas', projects: 'Projects', contact: 'Contact', companyName: 'Sadek Development' },
         badge: 'Professional preparation',
         pageTitle: 'DRIVER COACHING',
         s1Title: 'Speed is not the goal.<br>Understanding is.',

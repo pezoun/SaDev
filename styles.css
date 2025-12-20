@@ -4,6 +4,64 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+/* Parallax Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Specific backgrounds for each page */
+body.index-page::before {
+    background-image: url('fotky web sadek/aboutBackground.png');
+}
+
+body.projekty-page::before {
+    background-image: url('fotky web sadek/projektyBackground.png');
+}
+
+body.simulator-page::before {
+    background-image: url('fotky web sadek/simulatorBackground.png');
+}
+
+body.coaching-page::before {
+    background-image: url('fotky web sadek/coachingBackground.png');
+}
+
+body.about-page::before {
+    background-image: url('fotky web sadek/aboutBackground.png');
+}
+
+body.oblasti-page::before {
+    background-image: url('fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG');
+}
+
+body.realizace-page::before {
+    background-image: url('fotky web sadek/BMracing_Most_18_4_25_sprint-05540.JPG');
+}
+
+body.kontakty-page::before {
+    background-image: url('fotky web sadek/DSCF8531.JPG');
+}
+
+/* Mobile fallback - disable parallax on small screens */
+@media (max-width: 768px) {
+    body::before {
+        background-attachment: scroll;
+        background-size: cover;
+    }
+}
+
 .racing-line {
     background: linear-gradient(90deg, 
         #ef4444 0%, #ef4444 20%,

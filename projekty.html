@@ -106,7 +106,7 @@
       </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sadek Development - Realizace</title>
+    <title>Sadek Development - Projekty</title>
     
     <script>
       document.documentElement.classList.add('js');
@@ -120,6 +120,7 @@
     
     <style>
         * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        html { overflow: auto; }
         
         /* Sophisticated light background */
         body {
@@ -259,12 +260,12 @@
         }
         
         .status-badge.progress {
-          background: rgba(59, 130, 246, 0.1);
+          background: rgba(59, 130, 246, 0.3);
           color: rgb(37, 99, 235);
         }
         
         .status-badge.completed {
-          background: rgba(34, 197, 94, 0.1);
+          background: rgba(34, 197, 94, 0.3);
           color: rgb(22, 163, 74);
         }
         
@@ -325,15 +326,22 @@
           background: linear-gradient(180deg, #dc2626, #b91c1c);
         }
 
+        /* Progress bar */
+        .progress-bar {
+          background: linear-gradient(90deg, #ef4444, #f97316, #eab308);
+          box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
         /* Page title */
         .page-title {
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
           letter-spacing: -0.02em;
         }
     </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="text-gray-800 antialiased"
+<body class="text-gray-800 antialiased projekty-page"
       x-data="pageApp()"
       @scroll.window="onScroll()">
     
@@ -342,8 +350,8 @@
         <div class="bg-black/20 backdrop-blur-xl border-b border-white/10">
           <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="h-20 flex items-center justify-between">
-              <a href="index.html" class="text-white font-bold text-xl tracking-tight z-50">
-                Sadek Development
+              <a href="index.html" class="text-white font-bold text-2xl tracking-tight z-50">
+                <span x-text="t.nav.companyName"></span>
               </a>
               <!-- Desktop Menu -->
               <div class="hidden md:flex items-center gap-10 text-sm font-medium">
@@ -393,7 +401,11 @@
             </div>
           </div>
         </div>
-
+        <!-- Progress bar -->
+        <div class="h-1 bg-black/5">
+            <div class="h-1 progress-bar transition-[width] duration-300 ease-out" :style="`width:${scrollPct}%`"></div>
+        </div>
+    </nav>
         <!-- Mobile Menu Overlay -->
         <div x-show="mobileMenuOpen" 
              x-transition:enter="transition ease-out duration-300"
@@ -423,13 +435,16 @@
             <button @click="switchLanguage('en'); mobileMenuOpen = false" class="mobile-lang-btn" :class="currentLang === 'en' && 'active'">🇬🇧 English</button>
           </div>
         </div>
-    </nav>
-
+        
+        <!-- Progress bar -->
+        <div class="h-1 bg-black/5">
+            <div class="h-1 progress-bar transition-[width] duration-300 ease-out" :style="`width:${scrollPct}%`"></div>
+        </div>
     <!-- Hero -->
     <section class="pt-20 reveal">
         <div class="hero-wrapper relative h-[400px] md:h-[500px] overflow-hidden">
               <img src="fotky web sadek/1cf62b3d-4db3-4584-9fd5-0d9086d16845.JPG" 
-                alt="Realizace" 
+                alt="Projekty" 
                 class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         </div>
@@ -458,121 +473,183 @@
             </div>
 
             <!-- Projects Grid -->
-            <div class="grid lg:grid-cols-2 gap-16 lg:gap-20">
-                
-                <!-- Právě probíhá -->
-                <div class="reveal">
-                    <div class="mb-8">
-                        <div class="status-badge progress">
+                        <section class="py-20 sm:py-24 relative">
+                <div class="max-w-6xl mx-auto px-6 lg:px-8">
+                  <div class="reveal text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title" x-text="t.projects.title">
+                    </h2>
+                  </div>
+
+                  <style>
+                    .project-card {
+                      position: relative;
+                      border-radius: 20px;
+                      overflow: hidden;
+                      background: white;
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+
+                    .project-card:hover {
+                      transform: scale(1.02);
+                      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .project-image-wrapper {
+                      position: relative;
+                      overflow: hidden;
+                    }
+
+                    .project-card img {
+                      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+
+                    .project-card:hover img {
+                      transform: scale(1.05);
+                    }
+
+                    .project-card::after {
+                      content: '';
+                      position: absolute;
+                      inset: 0;
+                      border-radius: 20px;
+                      padding: 2px;
+                      background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(59, 130, 246, 0.3));
+                      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                      -webkit-mask-composite: xor;
+                      mask-composite: exclude;
+                      opacity: 0;
+                      transition: opacity 0.5s ease;
+                    }
+
+                    .project-card:hover::after {
+                      opacity: 1;
+                    }
+
+                    .project-content {
+                      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+
+                    .project-card:hover .project-content {
+                      transform: translateY(-4px);
+                    }
+
+                    .info-btn {
+                      position: absolute;
+                      bottom: 1.5rem;
+                      right: 1.5rem;
+                      z-index: 5;
+                      background: rgba(255, 255, 255, 0.9);
+                      backdrop-filter: blur(20px);
+                      border: 0.5px solid rgba(0, 0, 0, 0.08);
+                      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                      font-weight: 500;
+                      opacity: 0;
+                      transform: translateY(10px);
+                    }
+
+                    .project-card:hover .info-btn {
+                      opacity: 1;
+                      transform: translateY(0);
+                    }
+
+                    .info-btn:hover {
+                      background: rgba(255, 255, 255, 1);
+                      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                      transform: translateY(-2px);
+                    }
+
+                    .status-badge {
+                      backdrop-filter: blur(20px);
+                      transition: all 0.3s ease;
+                    }
+
+                    .project-card:hover .status-badge {
+                      transform: scale(1.05);
+                    }
+                  </style>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+                    <!-- Project 1 - Bydlení Kozlovice -->
+                    <div class="reveal">
+                      <div class="project-card" x-data="{showInfo: false}">
+                        <div class="relative project-image-wrapper">
+                          <div class="status-badge progress absolute top-4 left-4 z-10">
                             <span class="status-indicator"></span>
-                            <span x-text="t.statusOngoing"></span>
+                            <span x-text="t.projects.statusOngoing"></span>
+                          </div>
+                          <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
+                          </button>
+                          <div class="overflow-hidden">
+                            <img src="fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG" 
+                                 alt="Bydlení Kozlovice" 
+                                 class="w-full h-72 lg:h-80 object-cover">
+                          </div>
                         </div>
-                    </div>
-                    
-                    <div class="space-y-8">
-                        <!-- Project 1 -->
-                        <div class="project-card" x-data="{showInfo: false}">
-                            <div class="relative" @click="showInfo = true">
-                                <img src="fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG" 
-                                     alt="Vila Kunice" 
-                                     class="w-full h-72 object-cover" src="fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG">
-                            </div>
-                            <div class="p-6">
-                                <p class="text-sm font-medium text-gray-700" x-text="t.project1.location"></p>
-                            </div>
-                            
-                            <!-- Info Overlay -->
-                            <div class="project-info-overlay" :class="showInfo && 'active'">
-                                <button @click.stop="showInfo = false" class="close-btn">
-                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </button>
-                                <div class="text-center space-y-4 max-w-md" @click.stop>
-                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.project1.name"></h4>
-                                    <p class="text-gray-600 leading-relaxed" x-text="t.project1.description"></p>
-                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
-                                        <p class="font-medium"><span x-text="t.labels.area"></span>: <span class="text-gray-900">250 m²</span></p>
-                                        <p class="font-medium"><span x-text="t.labels.rooms"></span>: <span class="text-gray-900">5+1</span></p>
-                                        <p class="font-medium"><span x-text="t.labels.garage"></span>: <span class="text-gray-900" x-text="t.project1.garageCount"></span></p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="p-6 md:p-8 project-content">
+                          <h3 class="text-xl font-bold text-gray-900 mb-2" x-text="t.projects.project1.name"></h3>
+                          <p class="text-sm text-gray-600 mb-3" x-text="t.projects.project1.location"></p>
+                          <p class="text-sm text-gray-700 leading-relaxed" x-text="t.projects.project1.preview"></p>
                         </div>
 
-                        <!-- Project 2 -->
-                        <div class="project-card" x-data="{showInfo: false}">
-                            <div class="relative" @click="showInfo = true">
-                                <img src="fotky web sadek/66b78520-f1e3-4bf0-b83c-632a5dcde9d5.JPG" 
-                                     alt="Rezidence Kunice" 
-                                     class="w-full h-72 object-cover" src="fotky web sadek/66b78520-f1e3-4bf0-b83c-632a5dcde9d5.JPG">
+                        <!-- Info Overlay -->
+                        <div class="project-info-overlay" :class="showInfo && 'active'">
+                          <button @click.stop="showInfo = false" class="close-btn">
+                            <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                          </button>
+                          <div class="text-center space-y-4 max-w-xs" @click.stop>
+                            <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project1.name"></h4>
+                            <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project1.description"></p>
+                            <div class="pt-3 space-y-1.5 text-sm text-gray-600">
+                              <p class="font-medium">0+kk až 3+kk</p>
                             </div>
-                            <div class="p-6">
-                                <p class="text-sm font-medium text-gray-700" x-text="t.project2.location"></p>
-                            </div>
-                            
-                            <!-- Info Overlay -->
-                            <div class="project-info-overlay" :class="showInfo && 'active'">
-                                <button @click.stop="showInfo = false" class="close-btn">
-                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </button>
-                                <div class="text-center space-y-4 max-w-md" @click.stop>
-                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.project2.name"></h4>
-                                    <p class="text-gray-600 leading-relaxed" x-text="t.project2.description"></p>
-                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
-                                        <p class="font-medium"><span x-text="t.labels.area"></span>: <span class="text-gray-900">320 m²</span></p>
-                                        <p class="font-medium"><span x-text="t.labels.rooms"></span>: <span class="text-gray-900">6+1</span></p>
-                                        <p class="font-medium"><span x-text="t.labels.energyClass"></span>: <span class="text-gray-900">A</span></p>
-                                    </div>
-                                </div>
-                            </div>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                </div>
 
-                <!-- Dokončeno -->
-                <div class="reveal">
-                    <div class="mb-8 text-right lg:text-left">
-                        <div class="status-badge completed inline-flex">
+                    <!-- Project 2 - Vila Tichá -->
+                    <div class="reveal">
+                      <div class="project-card" x-data="{showInfo: false}">
+                        <div class="relative project-image-wrapper">
+                          <div class="status-badge progress absolute top-4 left-4 z-10">
                             <span class="status-indicator"></span>
-                            <span x-text="t.statusCompleted"></span>
+                            <span x-text="t.projects.statusOngoing"></span>
+                          </div>
+                          <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
+                          </button>
+                          <div class="overflow-hidden">
+                            <img src="fotky web sadek/IMG_8263.JPG" 
+                                 alt="Vila Tichá" 
+                                 class="w-full h-72 lg:h-80 object-cover">
+                          </div>
                         </div>
-                    </div>
-                    
-                    <div class="space-y-8">
-                        <!-- Project 3 -->
-                        <div class="project-card" x-data="{showInfo: false}">
-                            <div class="relative" @click="showInfo = true">
-                                <img src="fotky web sadek/IMG_8263.JPG" 
-                                     alt="Vila Dokončená" 
-                                     class="w-full h-72 object-cover" src="fotky web sadek/840d5598-f950-4ae7-ae6a-698c2c0682a6.JPG">
-                            </div>
-                            <div class="p-6">
-                                <p class="text-sm font-medium text-gray-700" x-text="t.project3.location"></p>
-                            </div>
-                            
-                            <!-- Info Overlay -->
-                            <div class="project-info-overlay" :class="showInfo && 'active'">
-                                <button @click.stop="showInfo = false" class="close-btn">
-                                    <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </button>
-                                <div class="text-center space-y-4 max-w-md" @click.stop>
-                                    <h4 class="text-3xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.project3.name"></h4>
-                                    <p class="text-gray-600 leading-relaxed" x-text="t.project3.description"></p>
-                                    <div class="pt-4 space-y-2 text-sm text-gray-600">
-                                        <p class="font-medium"><span x-text="t.labels.area"></span>: <span class="text-gray-900">280 m²</span></p>
-                                        <p class="font-medium"><span x-text="t.labels.rooms"></span>: <span class="text-gray-900">5+1</span></p>
-                                        <p class="font-medium"><span x-text="t.labels.completed"></span>: <span class="text-gray-900">2024</span></p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="p-6 md:p-8 project-content">
+                          <h3 class="text-xl font-bold text-gray-900 mb-2" x-text="t.projects.project2.name"></h3>
+                          <p class="text-sm text-gray-600 mb-3" x-text="t.projects.project2.location"></p>
+                          <p class="text-sm text-gray-700 leading-relaxed" x-text="t.projects.project2.preview"></p>
                         </div>
+
+                        <!-- Info Overlay -->
+                        <div class="project-info-overlay" :class="showInfo && 'active'">
+                          <button @click.stop="showInfo = false" class="close-btn">
+                            <svg class="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                          </button>
+                          <div class="text-center space-y-4 max-w-xs" @click.stop>
+                            <h4 class="text-2xl font-semibold text-gray-900" style="letter-spacing: -0.02em;" x-text="t.projects.project2.name"></h4>
+                            <p class="text-gray-600 text-sm leading-relaxed" x-text="t.projects.project2.description"></p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </section>
 
             </div>
         </div>
@@ -594,44 +671,38 @@
 
     <script>
         // Translation data
-        const translations = {
+                const translations = {
             cs: {
                 nav: {
                     about: 'O nás',
                     business: 'Oblasti podnikání',
                     projects: 'Projekty',
-                    contact: 'Kontakty'
+                    contact: 'Kontakty',
+                    companyName: 'Šádek Development'
                 },
-                pageTitle: 'REALIZACE',
+                pageTitle: 'PROJEKTY',
                 intro: {
                     title: 'Každý domov začíná vizí.',
                     paragraph1: 'Věříme, že prostor, ve kterém žijeme, formuje způsob, jakým myslíme, tvoříme i odpočíváme. Naším cílem je proto vytvářet místa, která nejsou jen stavebním projektem, ale pevným bodem v proměnlivém světě. Domy, které rostou z promyšlených detailů, respektu k lokalitě a poctivého řemesla.',
                     paragraph2: 'Stavíme prostředí, kde se rodí příběhy – a každý z nich začíná právě tady.'
                 },
-                statusOngoing: 'Právě probíhá',
-                statusCompleted: 'Dokončeno',
-                labels: {
-                    area: 'Plocha',
-                    rooms: 'Pokoje',
-                    garage: 'Garáž',
-                    energyClass: 'Energetická třída',
-                    completed: 'Dokončeno'
-                },
-                project1: {
-                    name: 'Vila Kunice',
-                    location: 'Vila / Kunice pod Ondřejníkem',
-                    description: 'Moderní rodinný dům s garáží pro dvě vozidla. Dřevěný obklad, panoramatická okna a propojení s přírodou. Dokončení plánováno na Q2 2025.',
-                    garageCount: '2 vozidla'
-                },
-                project2: {
-                    name: 'Rezidence Kunice',
-                    location: 'Vila / Kunice pod Ondřejníkem',
-                    description: 'Luxusní bydlení v klidném prostředí s moderními technologiemi. Důraz na energetickou účinnost a komfort.'
-                },
-                project3: {
-                    name: 'Vila Dokončená',
-                    location: 'Vila / Kunice pod Ondřejníkem',
-                    description: 'Úspěšně dokončený projekt s vysokými standardy bydlení. Reference kvalitní práce a pozornosti k detailu.'
+                projects: {
+                    title: 'PROJEKTY',
+                    statusOngoing: 'Právě probíhá',
+                    statusCompleted: 'Dokončeno',
+                    info: 'Info',
+                    project1: {
+                        name: 'Bydlení Kozlovice',
+                        location: 'Bydlení / Kozlovice',
+                        preview: 'Rezidenční projekt s důrazem na kvalitní a pohodové bydlení.',
+                        description: 'Připravujeme menší rezidenční projekt, který je navržen s důrazem na pohodové a kvalitní bydlení. Cílem je vytvořit místo, kde se dobře žije dnes i za mnoho let – bez zbytečných kompromisů v dispozicích, provedení i celkovém pojetí.'
+                    },
+                    project2: {
+                        name: 'Vila Tichá',
+                        location: 'Vila / Čeladná',
+                        preview: 'Nadstandardní bydlení v Beskydech s respektem k přírodě.',
+                        description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.'
+                    }
                 }
             },
             en: {
@@ -639,38 +710,32 @@
                     about: 'About Us',
                     business: 'Business Areas',
                     projects: 'Projects',
-                    contact: 'Contact'
+                    contact: 'Contact',
+                    companyName: 'Sadek Development'
                 },
                 pageTitle: 'PROJECTS',
                 intro: {
                     title: 'Every home begins with a vision.',
-                    paragraph1: 'We believe that the space in which we live shapes the way we think, create and rest. Our goal is therefore to create places that are not just a construction project, but a fixed point in a changing world. Homes that grow from thoughtful details, respect for the location and honest craftsmanship.',
-                    paragraph2: 'We build environments where stories are born – and each one begins right here.'
+                    paragraph1: 'We believe the spaces we live in shape how we think, create, and rest. Our goal is to create places that are more than construction projects—stable points in a changing world. Homes built from thoughtful details, respect for the location, and honest craftsmanship.',
+                    paragraph2: 'We build environments where stories are born—and each one begins right here.'
                 },
-                statusOngoing: 'Ongoing',
-                statusCompleted: 'Completed',
-                labels: {
-                    area: 'Area',
-                    rooms: 'Rooms',
-                    garage: 'Garage',
-                    energyClass: 'Energy Class',
-                    completed: 'Completed'
-                },
-                project1: {
-                    name: 'Kunice Villa',
-                    location: 'Villa / Kunice pod Ondřejníkem',
-                    description: 'Modern family house with garage for two vehicles. Wooden cladding, panoramic windows and connection with nature. Completion planned for Q2 2025.',
-                    garageCount: '2 vehicles'
-                },
-                project2: {
-                    name: 'Kunice Residence',
-                    location: 'Villa / Kunice pod Ondřejníkem',
-                    description: 'Luxury living in a quiet environment with modern technologies. Emphasis on energy efficiency and comfort.'
-                },
-                project3: {
-                    name: 'Completed Villa',
-                    location: 'Villa / Kunice pod Ondřejníkem',
-                    description: 'Successfully completed project with high living standards. Reference of quality work and attention to detail.'
+                projects: {
+                    title: 'PROJECTS',
+                    statusOngoing: 'Ongoing',
+                    statusCompleted: 'Completed',
+                    info: 'Info',
+                    project1: {
+                        name: 'Kozlovice Housing',
+                        location: 'Housing / Kozlovice',
+                        preview: 'A residential project focused on calm, high-quality living.',
+                        description: 'We are preparing a smaller residential project designed with an emphasis on comfortable, high-quality living. The goal is to create a place that works today and for many years to come—without unnecessary compromises in layouts, execution, or overall concept.'
+                    },
+                    project2: {
+                        name: 'Silent Villa',
+                        location: 'Villa / Čeladná',
+                        preview: 'Premium living in the Beskydy mountains with respect for nature.',
+                        description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.'
+                    }
                 }
             }
         };
@@ -695,6 +760,7 @@
 
         function pageApp(){
           return {
+            scrollPct: 0,
             scrolled: false,
             mobileMenuOpen: false,
             currentLang: 'cs',
@@ -719,7 +785,10 @@
             },
             
             onScroll(){
-              const st = document.documentElement.scrollTop || document.body.scrollTop;
+              const doc = document.documentElement;
+              const st = doc.scrollTop || document.body.scrollTop;
+              const sh = doc.scrollHeight - doc.clientHeight;
+              this.scrollPct = sh > 0 ? Math.min(100, Math.max(0, (st / sh) * 100)) : 0;
               this.scrolled = st > 50;
             }
           }
