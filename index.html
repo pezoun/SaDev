@@ -210,12 +210,7 @@ nav {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
   position: relative;
   background: white;
-}
-
-.project-card img {
-  display: block;
-  width: 100%;
-  height: 100%;
+      min-height: 480px;
   object-fit: cover;
 }
 
@@ -551,9 +546,10 @@ nav {
   <!-- Hero Slider -->
   <section class="pt-20 reveal" x-data="{
       slides: [
-        'fotky web sadek/1cf62b3d-4db3-4584-9fd5-0d9086d16845.JPG',
-        'fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG',
-        'fotky web sadek/66b78520-f1e3-4bf0-b83c-632a5dcde9d5.JPG'
+        'fotky web sadek/k4.jpg',
+        'fotky web sadek/kozlovice.jpg',
+        'fotky web sadek/26f6a931-0746-492b-b327-30246c30b031.JPG',
+        'fotky web sadek/IMG_8263.JPG'
       ],
       i: 0,
       next(){ this.i = (this.i + 1) % this.slides.length },
@@ -859,7 +855,7 @@ nav {
           business: 'Oblasti podnikání',
           projects: 'Projekty',
           contact: 'Kontakty',
-          companyName: 'Šádek Development'
+          companyName: 'Šádek Development s.r.o.'
         },
         slider: {
           prev: 'Předchozí',
@@ -892,7 +888,7 @@ nav {
           },
           project2: {
             name: 'Bytový dům Tichá',
-            location: 'Bytový dům / Čeladná',
+            location: 'Bytový dům / Tichá',
             preview: 'Nadstandardní bydlení v Beskydech s respektem k přírodě.',
             description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.',
             status: 'Dokončeno'
@@ -905,7 +901,7 @@ nav {
           business: 'Business Areas',
           projects: 'Projects',
           contact: 'Contact',
-          companyName: 'Sadek Development'
+          companyName: 'Sadek Development s.r.o.'
         },
         slider: {
           prev: 'Previous',
@@ -938,7 +934,7 @@ nav {
           },
           project2: {
             name: 'Apartment Building Tichá',
-            location: 'Apartment Building / Čeledná',
+            location: 'Apartment Building / Tichá',
             description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.',
             status: 'Completed'
           },
