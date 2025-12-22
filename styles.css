@@ -43,7 +43,8 @@ body.about-page::before {
 }
 
 body.oblasti-page::before {
-    background-image: url('fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG');
+    /* Removed the background image for the oblasti page */
+    background-image: none;
 }
 
 body.realizace-page::before {

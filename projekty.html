@@ -155,18 +155,27 @@
         }
 
         /* Hero image */
-        .hero-wrapper {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .hero-wrapper img {
-          transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hero-wrapper:hover img {
-          transform: scale(1.05);
-        }
+.hero-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-image: url("./fotky%20web%20sadek/projektyBackground.png");
+  background-size: 80%; /* Zmenšeno */
+  background-position: center 20%; /* Posunuto výše */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Mobile fallback */
+@media (max-width: 768px) {
+  .hero-wrapper { 
+    background-attachment: scroll; 
+  }
+}
+
+.hero-wrapper img {
+  opacity: 0.92; /* Průhlednost aby prosvítal parallax */
+  transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
         /* Reveal animations */
         .js .reveal {
@@ -515,8 +524,7 @@
                       border-radius: 20px;
                       padding: 2px;
                       background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(59, 130, 246, 0.3));
-                      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                      -webkit-mask-composite: xor;
+                     
                       mask-composite: exclude;
                       opacity: 0;
                       transition: opacity 0.5s ease;
@@ -615,9 +623,9 @@
                     <div class="reveal">
                       <div class="project-card" x-data="{showInfo: false}">
                         <div class="relative project-image-wrapper">
-                          <div class="status-badge progress absolute top-4 left-4 z-10">
+                          <div class="status-badge completed absolute top-4 left-4 z-10">
                             <span class="status-indicator"></span>
-                            <span x-text="t.projects.statusOngoing"></span>
+                            <span x-text="t.projects.statusCompleted"></span>
                           </div>
                           <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
                           </button>
@@ -698,10 +706,11 @@
                         description: 'Připravujeme menší rezidenční projekt, který je navržen s důrazem na pohodové a kvalitní bydlení. Cílem je vytvořit místo, kde se dobře žije dnes i za mnoho let – bez zbytečných kompromisů v dispozicích, provedení i celkovém pojetí.'
                     },
                     project2: {
-                        name: 'Vila Tichá',
-                        location: 'Vila / Čeladná',
+                        name: 'Bytový dům Tichá',
+                        location: 'Bytový dům / Čeladná',
                         preview: 'Nadstandardní bydlení v Beskydech s respektem k přírodě.',
-                        description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.'
+                        description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.',
+                        status: 'Dokončeno'
                     }
                 }
             },
@@ -731,10 +740,11 @@
                         description: 'We are preparing a smaller residential project designed with an emphasis on comfortable, high-quality living. The goal is to create a place that works today and for many years to come—without unnecessary compromises in layouts, execution, or overall concept.'
                     },
                     project2: {
-                        name: 'Silent Villa',
-                        location: 'Villa / Čeladná',
+                        name: 'Apartment Building Tichá',
+                        location: 'Apartment Building / Čeladná',
                         preview: 'Premium living in the Beskydy mountains with respect for nature.',
-                        description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.'
+                        description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.',
+                        status: 'Completed'
                     }
                 }
             }

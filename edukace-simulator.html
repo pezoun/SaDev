@@ -208,29 +208,7 @@
           border-radius: 2px;
           box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
         }
-
-        /* Blueprint SVG animation */
-        .blueprint-wrapper {
-          transition: opacity 0.5s, transform 0.5s;
-        }
-        
-        .blueprint-wrapper:hover {
-          opacity: 0.35 !important;
-          transform: scale(1.02);
-        }
-        
-        .blueprint-line {
-          stroke-dasharray: 2000;
-          stroke-dashoffset: 2000;
-          animation: draw 3s ease-in-out forwards;
-        }
-        
-        @keyframes draw {
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-
+          
         /* Quote styling */
         .quote-large {
           font-size: 1.75rem;
@@ -441,58 +419,7 @@
                     </div>
 
                     <!-- Blueprint Car Illustration -->
-                    <div class="blueprint-wrapper opacity-20 hover:opacity-30 transition-all duration-500">
-                        <svg viewBox="0 0 800 400" class="w-full h-64 md:h-80" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Car body outline -->
-                            <path class="blueprint-line" 
-                                  d="M100 250 L200 250 L220 220 L280 220 L300 200 L450 200 L470 220 L550 220 L570 250 L700 250" 
-                                  stroke="#9ca3af" 
-                                  stroke-width="3" 
-                                  fill="none"
-                                  style="animation-delay: 0s"/>
-                            
-                            <!-- Front wheel -->
-                            <circle class="blueprint-line" 
-                                    cx="250" cy="270" r="35" 
-                                    stroke="#9ca3af" 
-                                    stroke-width="3" 
-                                    fill="none"
-                                    style="animation-delay: 0.5s"/>
-                            
-                            <!-- Rear wheel -->
-                            <circle class="blueprint-line" 
-                                    cx="600" cy="270" r="35" 
-                                    stroke="#9ca3af" 
-                                    stroke-width="3" 
-                                    fill="none"
-                                    style="animation-delay: 0.7s"/>
-                            
-                            <!-- Cabin -->
-                            <rect class="blueprint-line" 
-                                  x="300" y="175" 
-                                  width="150" height="75" 
-                                  stroke="#9ca3af" 
-                                  stroke-width="3" 
-                                  fill="none" 
-                                  rx="8"
-                                  style="animation-delay: 0.3s"/>
-                            
-                            <!-- Detail lines -->
-                            <line class="blueprint-line" 
-                                  x1="220" y1="250" 
-                                  x2="220" y2="220" 
-                                  stroke="#9ca3af" 
-                                  stroke-width="2"
-                                  style="animation-delay: 1s"/>
-                            
-                            <line class="blueprint-line" 
-                                  x1="570" y1="250" 
-                                  x2="570" y2="220" 
-                                  stroke="#9ca3af" 
-                                  stroke-width="2"
-                                  style="animation-delay: 1.2s"/>
-                        </svg>
-                    </div>
+                    
 
                 </div>
             </div>

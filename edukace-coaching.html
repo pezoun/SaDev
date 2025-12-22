@@ -128,17 +128,44 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
+   body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.025) 0%, transparent 50%),
+    url("./fotky%20web%20sadek/aboutBackground.png"),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 
+    auto,
+    auto,
+    80%,
+    60px 60px;
+  background-position: 
+    center,
+    center,
+    center 20%,
+    0 0;
+  background-repeat: 
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    repeat;
+  background-attachment: fixed;
+  pointer-events: none;
+  z-index: 0;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+}
+
+/* Mobile fallback */
+@media (max-width: 768px) {
+  body::before { 
+    background-attachment: scroll;
+  }
+}
 
     .glass-card {
       background: rgba(255, 255, 255, 0.7);
@@ -470,7 +497,7 @@
         <div class="reveal">
           <div class="space-y-6 accent-line">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight" x-text="t.s3Title"></h2>
-            <p class="text-gray-700 text-lg leading-relaxed" x-text="t.s3Text"></p>
+            <p class="text-gray-700 text-lg leading-relaxed" x_text="t.s3Text"></p>
           </div>
         </div>
       </div>
@@ -568,12 +595,12 @@
         nav: { about: 'O nás', business: 'Oblasti podnikání', projects: 'Projekty', contact: 'Kontakty', companyName: 'Šádek Development' },
         badge: 'Profesionální příprava',
         pageTitle: 'ŘIDIČSKÝ COACHING',
-        s1Title: 'Rychlost není cílem.<br>Cílem je porozumění.',
-        s1Text: 'Na závodní trati nejde jen o to, jak rychle projedete zatáčku, ale jak hluboce rozumíte sobě, svému vozu a fyzice okamžiku.',
-        s2Title: 'Cesta k dokonalosti',
-        s2Text: 'Řidičský coaching na okruhu přináší víc než techniku – je to cesta k jistotě, klidu a přesnosti, které vznikají až tehdy, kdy se člověk naučí číst trať stejně jako vlastní instinkty.',
-        s3Title: 'Objevte své limity',
-        s3Text: 'V každém kole objevujete nové hranice. A možná zjistíte, že ty nejdůležitější se nenacházejí na asfaltu.',
+        s1Title: 'Bezpečná jízda a coaching',
+        s1Text: 'Nabízíme kurzy zaměřené na zlepšení bezpečné jízdy a ovládání vozu v běžném provozu i náročnějších situacích. Programy jsou vhodné nejen pro profesionály, ale i pro každodenní řidiče, kteří chtějí jezdit jistěji a s větším klidem.',
+        s2Title: 'Trackdays a road tripy',
+        s2Text: 'Připravujeme možnosti pořádání trackdays a organizovaných road tripů v Česku i zahraničí. Cílem je propojit zážitek z jízdy s rozvojem dovedností a sdílením zkušeností v přirozeném prostředí.',
+        s3Title: 'Instruktoři během trackdays',
+        s3Text: 'Během trackdays jsou k dispozici zkušení instruktoři, kteří pomáhají s technikou jízdy i individuálním posunem. Důraz je kladen na bezpečnost, plynulost a postupné zlepšování bez zbytečného tlaku.',
         comingTitle: 'Ve fázi příprav',
         comingText: 'Oblast řidičského coachingu je aktuálně ve fázi příprav. Intenzivně pracujeme na koncepci a obsahu tak, aby mohla v brzké době nabídnout profesionální a prakticky zaměřené služby.',
         lightboxLabel: 'Obrázek',
@@ -583,12 +610,12 @@
         nav: { about: 'About Us', business: 'Business Areas', projects: 'Projects', contact: 'Contact', companyName: 'Sadek Development' },
         badge: 'Professional preparation',
         pageTitle: 'DRIVER COACHING',
-        s1Title: 'Speed is not the goal.<br>Understanding is.',
-        s1Text: "On the racing track, it's not just about how fast you take a corner, but how deeply you understand yourself, your car, and the physics of the moment.",
-        s2Title: 'The path to mastery',
-        s2Text: "Driver coaching on the circuit brings more than technique – it's a path to confidence, calm, and precision that emerge only when one learns to read the track as well as their own instincts.",
-        s3Title: 'Discover your limits',
-        s3Text: 'In every lap you discover new limits. And you might find that the most important ones are not found on the asphalt.',
+        s1Title: 'Safe Driving and Coaching',
+        s1Text: 'We offer courses focused on improving safe driving and vehicle control in everyday traffic as well as in more challenging situations. The programs are suitable not only for professionals but also for everyday drivers who want to drive more confidently and calmly.',
+        s2Title: 'Trackdays and Road Trips',
+        s2Text: 'We are preparing opportunities for organizing trackdays and road trips in the Czech Republic and abroad. The goal is to combine the driving experience with skill development and sharing experiences in a natural environment.',
+        s3Title: 'Instructors During Trackdays',
+        s3Text: 'During trackdays, experienced instructors are available to assist with driving techniques and individual progress. The focus is on safety, smoothness, and gradual improvement without unnecessary pressure.',
         comingTitle: 'In preparation',
         comingText: 'Driver coaching is currently in the preparation phase. We are intensively working on the concept and content so that professional, practical services can be offered soon.',
         lightboxLabel: 'Image',

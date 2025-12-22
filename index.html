@@ -98,8 +98,8 @@ nav {
 /* Parallax background behind hero slideshow */
 .hero-wrapper {
   background-image: url("./fotky%20web%20sadek/aboutBackground.png");
-  background-size: cover;
-  background-position: center;
+  background-size: 80%; /* Zmenšeno z cover na 80% */
+  background-position: center 60%; /* Posunuto výše - bylo center */
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -700,8 +700,6 @@ nav {
           border-radius: 20px;
           padding: 2px;
           background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(59, 130, 246, 0.3));
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
           mask-composite: exclude;
           opacity: 0;
           transition: opacity 0.5s ease;
@@ -893,10 +891,11 @@ nav {
           description: 'Připravujeme menší rezidenční projekt, který je navržen s důrazem na pohodové a kvalitní bydlení. Cílem je vytvořit místo, kde se dobře žije dnes i za mnoho let – bez zbytečných kompromisů v dispozicích, provedení i celkovém pojetí.'
           },
           project2: {
-            name: 'Vila Tichá',
-            location: 'Vila / Čeladná',
+            name: 'Bytový dům Tichá',
+            location: 'Bytový dům / Čeladná',
             preview: 'Nadstandardní bydlení v Beskydech s respektem k přírodě.',
-            description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.'
+            description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.',
+            status: 'Dokončeno'
           }
         }
       },
@@ -937,9 +936,10 @@ nav {
             description: 'Modern villa with a view of Ondřejník. Completion planned for Q2 2025.'
           },
           project2: {
-            name: 'Kunice Villa',
-            location: 'Villa / Kunice pod Ondřejníkem',
-            description: 'Modern villa with a view of Ondřejník. Completion planned for Q3 2025.'
+            name: 'Apartment Building Tichá',
+            location: 'Apartment Building / Čeladná',
+            description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.',
+            status: 'Completed'
           },
           project3: {
             name: 'Kunice Villa',
