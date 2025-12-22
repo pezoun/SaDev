@@ -52,7 +52,10 @@ body.realizace-page::before {
 }
 
 body.kontakty-page::before {
-    background-image: url('fotky web sadek/DSCF8531.JPG');
+    background-image: url('fotky web sadek/1af53634-d51b-4298-8ef8-7bac3f02d85d.png');
+    background-position: center;
+    background-size: cover;
+    opacity: 0.25;
 }
 
 /* Mobile fallback - disable parallax on small screens */

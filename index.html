@@ -67,7 +67,7 @@ nav {
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #fff, #e5e7eb);
+  background: #2563eb; /* Blue color */
   border-radius: 2px;
   transition: width 0.3s;
 }
@@ -99,7 +99,7 @@ nav {
 .hero-wrapper {
   background-image: url("./fotky%20web%20sadek/aboutBackground.png");
   background-size: 80%; /* Zmenšeno z cover na 80% */
-  background-position: center 60%; /* Posunuto výše - bylo center */
+  background-position: center 80%; /* Posunuto výše - bylo center */
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -765,7 +765,7 @@ nav {
               <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
               </button>
               <div class="overflow-hidden">
-                <img src="fotky web sadek/38ba9ac5-b38a-4a79-a4ad-b0e294cbdd83.JPG" 
+                <img src="fotky web sadek/26f6a931-0746-492b-b327-30246c30b031.JPG" 
                      alt="Bydlení Kozlovice" 
                      class="w-full h-72 lg:h-80 object-cover">
               </div>
@@ -794,19 +794,19 @@ nav {
           </div>
         </div>
         
-        <!-- Project 2 - Vila Tichá -->
+        <!-- Project 2 - Bytový dům Tichá -->
         <div class="reveal">
           <div class="project-card" x-data="{showInfo: false}">
             <div class="relative project-image-wrapper">
-              <div class="status-badge progress absolute top-4 left-4 z-10">
+              <div class="status-badge completed absolute top-4 left-4 z-10">
                 <span class="status-indicator"></span>
-                <span x-text="t.projects.statusOngoing"></span>
+                <span x-text="t.projects.statusCompleted"></span>
               </div>
               <button @click.stop="showInfo = true" class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info">
               </button>
               <div class="overflow-hidden">
                 <img src="fotky web sadek/IMG_8263.JPG" 
-                     alt="Vila Tichá" 
+                     alt="Bytový dům Tichá" 
                      class="w-full h-72 lg:h-80 object-cover">
               </div>
             </div>
@@ -815,7 +815,7 @@ nav {
               <p class="text-sm text-gray-600 mb-3" x-text="t.projects.project2.location"></p>
               <p class="text-sm text-gray-700 leading-relaxed" x-text="t.projects.project2.preview"></p>
             </div>
-            
+
             <!-- Info Overlay -->
             <div class="project-info-overlay" :class="showInfo && 'active'">
               <button @click.stop="showInfo = false" class="close-btn">
@@ -931,13 +931,14 @@ nav {
           rooms: 'Rooms',
           completed: 'Completed',
           project1: {
-            name: 'Kunice Villa',
-            location: 'Villa / Kunice pod Ondřejníkem',
-            description: 'Modern villa with a view of Ondřejník. Completion planned for Q2 2025.'
+            name: 'Kozlovice Housing',
+            location: 'Housing / Kozlovice',
+            preview: 'A residential project focused on calm, high-quality living.',
+            description: 'We are preparing a smaller residential project designed with an emphasis on comfortable, high-quality living. The goal is to create a place that works today and for many years to come—without unnecessary compromises in layouts, execution, or overall concept.'
           },
           project2: {
             name: 'Apartment Building Tichá',
-            location: 'Apartment Building / Čeladná',
+            location: 'Apartment Building / Čeledná',
             description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.',
             status: 'Completed'
           },
@@ -982,6 +983,24 @@ nav {
         t: translations.cs,
 
         init() {
+          // Add this to your index.html pageApp init() function or as a separate script
+window.addEventListener('load', () => {
+  const hash = window.location.hash.substring(1); // Remove the # symbol
+  if (hash) {
+    setTimeout(() => {
+      const element = document.getElementById(hash);
+      if (element) {
+        const offset = 100;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: 'smooth'
+        });
+      }
+    }, 100); // Small delay to ensure page is fully loaded
+  }
+});
+          
           // Load saved language preference
           const saved = localStorage.getItem('siteLanguage');
           if (saved && translations[saved]) {

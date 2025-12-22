@@ -16,7 +16,7 @@
                   transform: translateX(-50%);
                   width: 0;
                   height: 2px;
-                  background: linear-gradient(90deg, #fff, #e5e7eb);
+                  background: #2563eb; /* Blue color */
                   border-radius: 2px;
                   transition: width 0.3s;
                 }
@@ -309,7 +309,7 @@
               <!-- Desktop Menu -->
               <div class="hidden md:flex items-center gap-10 text-sm font-medium">
                 <a href="index.html" class="nav-link" x-text="t.nav.about"></a>
-                <a href="oblasti-podnikani.html" class="nav-link active" x-text="t.nav.business"></a>
+                <a href="index.html#oblasti-podnikani" class="nav-link active" x-text="t.nav.business"></a>
                 <a href="projekty.html" class="nav-link" x-text="t.nav.projects"></a>
                 <a href="kontakty.html" class="nav-link" x-text="t.nav.contact"></a>
                 <!-- Desktop Language Selector -->
@@ -379,7 +379,7 @@
       <!-- Menu Items -->
       <nav class="flex flex-col items-center gap-2 mb-12">
         <a href="index.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.about"></a>
-        <a href="oblasti-podnikani.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.business"></a>
+        <a href="index.html#oblasti-podnikani" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.business"></a>
         <a href="projekty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.projects"></a>
         <a href="kontakty.html" @click="mobileMenuOpen = false" class="mobile-menu-link" x-text="t.nav.contact"></a>
       </nav>
