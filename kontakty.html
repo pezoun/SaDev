@@ -392,9 +392,9 @@
           <div class="contact-value">
             <div>Šádek Development s.r.o.</div>
             <div>Babická 2379/1a</div>
-            <div>149 00, Praha</div>
+            <div>Chodov</div>
+            <div>149 00 Praha 4</div>
             <div class="mt-2">IČO 21235589</div>
-            <div>DIČ CZ21235589</div>
           </div>
         </div>
 
@@ -408,7 +408,7 @@
           </div>
           <div class="contact-label" x-text="t.labels.email"></div>
           <div class="contact-value">
-            <a href="mailto:info@sadev.com" class="contact-link">info@sadev.com</a>
+            <a href="mailto:info@sadekdev.cz" class="contact-link">info@sadekdev.cz</a>
           </div>
         </div>
 
@@ -417,17 +417,12 @@
     </div>
   </main>
 
-  <!-- Footer (simple) -->
-  <footer class="py-16 relative border-t border-gray-300">
+  <!-- Footer -->
+  <footer class="py-8 relative">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="reveal">
-        <div class="text-left space-y-3 text-gray-700">
-          <div class="font-bold text-lg text-gray-900">Šádek Development s.r.o.</div>
-          <div>Babická 2379/1a</div>
-          <div>149 00, Praha</div>
-          <div>IČO 21235589</div>
-          <div>DIČ CZ21235589</div>
-        </div>
+      <div class="reveal text-center text-sm text-gray-500">
+        <div class="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400" x-text="translations[currentLang].copyright"></div>
+        <div class="mt-2 text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400">Web by Matěj Kadlčák and design by Jiří Vojta</div>
       </div>
     </div>
   </footer>
@@ -447,7 +442,9 @@
         labels: {
           company: 'Kontakty adresa',
           email: 'E-mail'
-        }
+        },
+        copyright: '© ' + new Date().getFullYear() + ' Šádek Development s.r.o. / Všechna práva vyhrazena',
+        credits: 'made by Matej Kadlcak and design by Jiri Vojta'
       },
       en: {
         nav: {
@@ -461,7 +458,9 @@
         labels: {
           company: 'Company details',
           email: 'E-mail'
-        }
+        },
+        copyright: '© ' + new Date().getFullYear() + ' Sadek Development s.r.o. / All rights reserved',
+        credits: 'made by Matej Kadlcak and design by Jiri Vojta'
       }
     };
 

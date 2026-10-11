@@ -346,6 +346,171 @@
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
           letter-spacing: -0.02em;
         }
+
+        .category-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 9999px;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          background: rgba(255, 255, 255, 0.65);
+          backdrop-filter: blur(12px);
+          font-size: 0.72rem;
+          letter-spacing: 0.17em;
+          text-transform: uppercase;
+          font-weight: 700;
+          color: rgba(17, 24, 39, 0.7);
+        }
+
+        .garden-card {
+          background: rgba(255, 255, 255, 0.66);
+          border: 1px solid rgba(148, 163, 184, 0.18);
+          box-shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+          border-radius: 32px;
+          overflow: hidden;
+        }
+
+        .garden-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          border-radius: 24px;
+        }
+
+        .garden-photo-slim {
+          width: 100%;
+          height: 540px;
+          object-fit: cover;
+          display: block;
+          border-radius: 24px;
+        }
+
+        @media (max-width: 768px) {
+          .garden-photo-slim {
+            height: 320px;
+          }
+        }
+
+        .garden-editorial {
+          background: #fbfbfa;
+        }
+
+        .garden-hero {
+          overflow: hidden;
+        }
+
+        .garden-rule {
+          width: 42px;
+          height: 4px;
+          border-radius: 999px;
+          background: #f4512a;
+        }
+
+        .garden-heading {
+          color: #17243a;
+          font-size: clamp(2rem, 4vw, 3.25rem);
+          font-weight: 900;
+          line-height: 0.98;
+          letter-spacing: -0.04em;
+        }
+
+        .garden-copy p,
+        .garden-technical-card p {
+          color: #475569;
+          font-size: 0.98rem;
+          line-height: 1.65;
+        }
+
+        .garden-editorial-image {
+          width: 100%;
+          height: 360px;
+          object-fit: cover;
+          border-radius: 18px;
+          box-shadow: 0 18px 34px rgba(15, 23, 42, 0.13);
+        }
+
+        .garden-gallery-block {
+          margin: 5rem 0;
+        }
+
+        .garden-gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: 190px 190px;
+          gap: 8px;
+        }
+
+        .garden-gallery-grid img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 12px;
+        }
+
+        .garden-gallery-grid img:nth-child(1),
+        .garden-gallery-grid img:nth-child(2) {
+          grid-column: span 2;
+        }
+
+        .garden-gallery-grid img:nth-child(3) {
+          grid-column: span 2;
+        }
+
+        .garden-gallery-caption {
+          max-width: 570px;
+          margin: 1rem 0 0 auto;
+          color: #64748b;
+          font-size: 0.85rem;
+          line-height: 1.55;
+        }
+
+        .garden-technical {
+          min-height: 440px;
+          overflow: hidden;
+        }
+
+        .garden-technical-card {
+          padding: 2rem;
+          border-radius: 18px;
+          background: rgba(255, 255, 255, 0.9);
+          box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+        }
+
+        @media (max-width: 768px) {
+          .garden-editorial-inner {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+          }
+
+          .garden-gallery-block {
+            margin: 4rem 0;
+          }
+
+          .garden-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 170px);
+          }
+
+          .garden-gallery-grid img:nth-child(1),
+          .garden-gallery-grid img:nth-child(2),
+          .garden-gallery-grid img:nth-child(3) {
+            grid-column: span 1;
+          }
+
+          .garden-gallery-grid img:nth-child(4) {
+            grid-column: span 2;
+          }
+
+          .garden-editorial-image {
+            height: 280px;
+          }
+
+          .garden-technical {
+            min-height: 520px;
+          }
+        }
     </style>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -485,8 +650,8 @@
                         <section class="py-20 sm:py-24 relative">
                 <div class="max-w-6xl mx-auto px-6 lg:px-8">
                   <div class="reveal text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title" x-text="t.projects.title">
-                    </h2>
+                    <span class="category-tag mb-6">Nemovitosti</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title">NEMOVITOSTI</h2>
                   </div>
 
                   <style>
@@ -659,20 +824,75 @@
                 </div>
               </section>
 
+              <section class="garden-editorial relative">
+                <div class="garden-hero relative min-h-[560px] md:min-h-[680px] flex items-end">
+                  <img src="fotky web sadek/1A.JPG" alt="Japonsky inspirovaná zahrada" class="absolute inset-0 w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent"></div>
+                  <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8 py-20 md:py-28">
+                    <div class="max-w-2xl text-white reveal">
+                      <h2 class="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.94] tracking-tight" x-text="t.garden.title"></h2>
+                      <div class="garden-rule my-7"></div>
+                      <p class="text-lg md:text-2xl leading-relaxed text-white/90">Harmonie přírody, klid a krása,<br class="hidden sm:block"> která přirozeně doplňuje váš domov.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="garden-editorial-inner max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24">
+                  <article class="garden-editorial-row grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+                    <div class="garden-copy lg:pr-8">
+                      <h3 class="garden-heading" x-text="t.garden.heading1"></h3>
+                      <div class="garden-rule my-5"></div>
+                      <p x-text="t.garden.paragraph1"></p>
+                    </div>
+                    <img src="fotky web sadek/1B.jpg" alt="Zahrada s trávníkem a ohništěm" class="garden-editorial-image">
+                  </article>
+
+                  <article class="garden-gallery-block reveal">
+                    <h3 class="garden-heading mb-5">Realizace v obrazech</h3>
+                    <div class="garden-rule mb-7"></div>
+                    <div class="garden-gallery-grid">
+                      <img src="fotky web sadek/1A.JPG" alt="Realizace zahrady 1A">
+                      <img src="fotky web sadek/1B.jpg" alt="Realizace zahrady 1B">
+                      <img src="fotky web sadek/11.JPG" alt="Zahradní cesta">
+                      <img src="fotky web sadek/12.jpg" alt="Zahradní výsadba">
+                      <img src="fotky web sadek/13.JPG" alt="Zahradní detail">
+                    </div>
+                    <p class="garden-gallery-caption">Každá zahrada je jedinečná. Podívejte se na příklady z naší realizace, které ukazují, jak může vypadat zahrada inspirovaná japonským stylem v různých ročních obdobích a z různých úhlů pohledu.</p>
+                  </article>
+
+                  <article class="garden-editorial-row grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+                    <div class="garden-copy lg:pr-8">
+                      <h3 class="garden-heading" x-text="t.garden.heading2"></h3>
+                      <div class="garden-rule my-5"></div>
+                      <p x-text="t.garden.paragraph2"></p>
+                    </div>
+                    <img src="fotky web sadek/15.JPG" alt="Přírodní materiály v zahradě" class="garden-editorial-image">
+                  </article>
+                </div>
+
+                <div class="garden-technical relative">
+                  <img src="fotky web sadek/13.JPG" alt="Cesta a výsadba v zahradě" class="absolute inset-0 w-full h-full object-cover">
+                  <div class="absolute inset-0 bg-sky-100/45"></div>
+                  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 flex justify-end">
+                    <article class="garden-technical-card max-w-xl reveal">
+                      <h3 class="garden-heading" x-text="t.garden.heading3"></h3>
+                      <div class="garden-rule my-5"></div>
+                      <p x-text="t.garden.paragraph3"></p>
+                    </article>
+                  </div>
+                </div>
+              </section>
+
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="kontakty" class="py-16 relative border-t border-gray-300">
+    <footer id="kontakty" class="py-8 relative">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="reveal">
-                <div class="text-left space-y-3 text-gray-700">
-                    <div class="font-bold text-lg text-gray-900">Sadek Development s.r.o.</div>
-                    <div>Babická 2379/1a</div>
-                    <div>Praha</div>
-                    <div>148 00</div>
-                </div>
+            <div class="reveal text-center text-sm text-gray-500">
+                <div class="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400" x-text="translations.copyright"></div>
+                <div class="mt-2 text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400">Web by Matěj Kadlčák and design by Jiří Vojta</div>
             </div>
         </div>
     </footer>
@@ -712,8 +932,19 @@
                         description: 'Projekt nabízí nadstandardní bydlení v Beskydech, spojující klid přírody s moderním komfortem. Důraz je kladen na světlo, prostor a respekt k okolnímu prostředí. Díky blízkosti Čeladné je ideální volbou pro kvalitní a harmonické bydlení.',
                         status: 'Dokončeno'
                     }
+                },
+                garden: {
+                    title: 'ZAHRADY',
+                    heading1: 'Zahrada jako místo pro klid a inspiraci',
+                    heading2: 'Promyšlené detaily a přírodní materiály',
+                    heading3: 'Technické zázemí a řešení na míru',
+                    paragraph1: 'Zahrada může být místem, kde zpomalíte, načerpáte energii a budete se cítit dobře v každém ročním období. Navrhujeme a proměňujeme zahrady inspirované japonským stylem, ve kterých se přirozeně propojují zeleň, kámen a voda. Vycházíme z charakteru místa, architektury domu i vašich představ o tom, jak chcete zahradu využívat. Společně hledáme vyvážené rozložení výsadby, cest a odpočinkových zákoutí tak, aby měl každý prvek své místo.',
+                    paragraph2: 'Zajistíme výběr, dovoz a výsadbu stromů, které doplníme vhodnými keři, okrasnými travinami a kvetoucími trvalkami. Při návrhu zohledňujeme místní podmínky, proměny během roku i budoucí růst rostlin. Osobitý charakter mohou zahradě dodat kamenné nášlapy, štěrkové plochy, přírodní balvany nebo citlivě zakomponované dřevěné prvky. Klidnou atmosféru podpoří zvuk vody, ať už v podobě drobného pramene, vodopádu, nebo tradiční kamenné nádrže tsukubai. Součástí návrhu může být také posezení, optické oddělení zahrady pro větší soukromí či decentní osvětlení cest, stromů a vodních prvků.',
+                    paragraph3: 'Vedle vzhledu řešíme i technické zázemí, od zavlažování přes čerpadla a rozvody vody až po elektroinstalaci. Technické prvky začleňujeme s ohledem na snadnou údržbu a nenápadné umístění. Rozsah úprav přizpůsobíme vašemu prostoru i rozpočtu, od proměny jednoho zákoutí po ucelené řešení zahrady. Důraz klademe na návaznost jednotlivých detailů, aby zahrada působila přirozeně a harmonicky jako celek. Rádi s vámi vytvoříme prostor, který bude dělat radost při pohledu z domu i při každodenním pobytu venku.'
                 }
             },
+            copyright: '© ' + new Date().getFullYear() + ' Šádek Development s.r.o. / Všechna práva vyhrazena',
+            credits: 'made by Matej Kadlcak and design by Jiri Vojta',
             en: {
                 nav: {
                     about: 'About Us',
@@ -746,8 +977,19 @@
                         description: 'A premium housing project in the Beskydy mountains, combining natural serenity with modern comfort. The design emphasizes light, space, and respect for the surrounding environment. Thanks to the proximity of Čeladná, it’s an ideal choice for harmonious living.',
                         status: 'Completed'
                     }
+                },
+                garden: {
+                    title: 'GARDENS',
+                    heading1: 'A garden as a place to slow down and recharge',
+                    heading2: 'Thoughtful details and natural materials',
+                    heading3: 'Technical infrastructure and tailored solutions',
+                    paragraph1: 'A garden can be a place where you slow down, recharge and feel good in every season. We design and transform gardens inspired by the Japanese style, where greenery, stone and water naturally come together. We build on the character of the site, the architecture of the house and your ideas about how you want to use the garden. Together we look for a balanced layout of planting, paths and resting areas so that each element has its place.',
+                    paragraph2: 'We take care of the selection, delivery and planting of trees, complemented by suitable shrubs, ornamental grasses and flowering perennials. In our design we consider local conditions, seasonal changes and the future growth of plants. The character of the garden can be enriched with stone steps, gravel surfaces, natural boulders or sensitively integrated wooden elements. A calm atmosphere is supported by the sound of water, whether in the form of a small stream, waterfall or a traditional stone tsukubai basin. The design can also include seating, visual separation for greater privacy or discreet lighting for paths, trees and water features.',
+                    paragraph3: 'In addition to appearance, we also solve the technical background, from irrigation and pumps to water and electrical installations. We integrate technical elements with an emphasis on easy maintenance and discreet placement. We adapt the scope of work to your space and budget, from transforming a single corner to a complete garden design. We pay attention to the continuity of details so that the garden feels natural and harmonious as a whole. We would be happy to create a space with you that brings joy both when looking out from the house and during everyday outdoor living.'
                 }
-            }
+            },
+            copyright: '© ' + new Date().getFullYear() + ' Sadek Development s.r.o. / All rights reserved',
+            credits: 'made by Matej Kadlcak and design by Jiri Vojta'
         };
 
         // Reveal on scroll

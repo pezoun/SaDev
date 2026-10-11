@@ -517,21 +517,10 @@
       </div>
 
       <!-- Footer -->
-      <div class="mt-32 pt-12 border-t border-gray-300">
-        <div id="kontakty" class="reveal">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h4 class="text-gray-900 font-bold text-lg mb-4">Sadek Development s.r.o.</h4>
-              <div class="space-y-2 text-gray-600">
-                <p>Babická 2379/1a</p>
-                <p>Praha</p>
-                <p>148 00</p>
-              </div>
-            </div>
-            <div class="flex items-center justify-end">
-              <div class="text-gray-500 text-sm" x-text="t.copyright"></div>
-            </div>
-          </div>
+      <div class="mt-16 pt-8">
+        <div id="kontakty" class="reveal text-center text-sm text-gray-500">
+          <div class="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400" x-text="t.copyright"></div>
+          <div class="mt-2 text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400">Web by Matěj Kadlčák and design by Jiří Vojta</div>
         </div>
       </div>
 
@@ -603,8 +592,7 @@
         s3Text: 'Během trackdays jsou k dispozici zkušení instruktoři, kteří pomáhají s technikou jízdy i individuálním posunem. Důraz je kladen na bezpečnost, plynulost a postupné zlepšování bez zbytečného tlaku.',
         comingTitle: 'Ve fázi příprav',
         comingText: 'Oblast řidičského coachingu je aktuálně ve fázi příprav. Intenzivně pracujeme na koncepci a obsahu tak, aby mohla v brzké době nabídnout profesionální a prakticky zaměřené služby.',
-        lightboxLabel: 'Obrázek',
-        copyright: '© 2024 Šádek Development. Všechna práva vyhrazena.'
+        lightboxLabel: 'Obrázek'
       },
       en: {
         nav: { about: 'About Us', business: 'Business Areas', projects: 'Projects', contact: 'Contact', companyName: 'Sadek Development s.r.o.' },
@@ -619,7 +607,8 @@
         comingTitle: 'In preparation',
         comingText: 'Driver coaching is currently in the preparation phase. We are intensively working on the concept and content so that professional, practical services can be offered soon.',
         lightboxLabel: 'Image',
-        copyright: '© 2024 Sadek Development. All rights reserved.'
+        copyright: '© ' + new Date().getFullYear() + ' Sadek Development s.r.o. / All rights reserved',
+        credits: 'made by Matej Kadlcak and design by Jiri Vojta'
       }
     };
 

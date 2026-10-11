@@ -457,15 +457,11 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="py-16 relative border-t border-gray-300">
+    <footer id="contact" class="py-8 relative">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="reveal">
-                <div class="text-left space-y-3 text-gray-700">
-                    <div class="font-bold text-lg text-gray-900">Sadek Development s.r.o.</div>
-                    <div>Babická 2379/1a</div>
-                    <div>Praha</div>
-                    <div>148 00</div>
-                </div>
+            <div class="reveal text-center text-sm text-gray-500">
+                    <div class="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400" x-text="translations.copyright"></div>
+                    <div class="mt-2 text-[10px] sm:text-xs uppercase tracking-[0.18em] text-gray-400">Web by Matěj Kadlčák and design by Jiří Vojta</div>
             </div>
         </div>
     </footer>
@@ -492,6 +488,8 @@
                 },
                 learnMore: 'Zjistit více'
             },
+            copyright: '© ' + new Date().getFullYear() + ' Šádek Development s.r.o. / Všechna práva vyhrazena',
+            credits: 'made by Matej Kadlcak and design by Jiri Vojta',
             en: {
                 nav: {
                     about: 'About Us',
@@ -510,7 +508,9 @@
                     description: 'Professional preparation and improvement of driving abilities'
                 },
                 learnMore: 'Learn More'
-            }
+            },
+            copyright: '© ' + new Date().getFullYear() + ' Sadek Development s.r.o. / All rights reserved',
+            credits: 'made by Matej Kadlcak and design by Jiri Vojta'
         };
 
         // Reveal on scroll
