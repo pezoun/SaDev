@@ -824,61 +824,36 @@
                 </div>
               </section>
 
-              <section class="garden-editorial relative">
-                <div class="garden-hero relative min-h-[560px] md:min-h-[680px] flex items-end">
-                  <img src="fotky web sadek/1A.JPG" alt="Japonsky inspirovaná zahrada" class="absolute inset-0 w-full h-full object-cover">
-                  <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent"></div>
-                  <div class="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8 py-20 md:py-28">
-                    <div class="max-w-2xl text-white reveal">
-                      <h2 class="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.94] tracking-tight" x-text="t.garden.title"></h2>
-                      <div class="garden-rule my-7"></div>
-                      <p class="text-lg md:text-2xl leading-relaxed text-white/90">Harmonie přírody, klid a krása,<br class="hidden sm:block"> která přirozeně doplňuje váš domov.</p>
-                    </div>
+              <section class="py-20 sm:py-24 relative">
+                <div class="max-w-6xl mx-auto px-6 lg:px-8">
+                  <div class="reveal text-center mb-16">
+                    <span class="category-tag mb-6">Zahrady</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 section-title">ZAHRADY</h2>
                   </div>
-                </div>
 
-                <div class="garden-editorial-inner max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24">
-                  <article class="garden-editorial-row grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
-                    <div class="garden-copy lg:pr-8">
-                      <h3 class="garden-heading" x-text="t.garden.heading1"></h3>
-                      <div class="garden-rule my-5"></div>
-                      <p x-text="t.garden.paragraph1"></p>
+                  <div class="max-w-2xl mx-auto">
+                    <div class="reveal">
+                      <div class="project-card">
+                        <a href="zahrady.html" class="block">
+                          <div class="relative project-image-wrapper">
+                            <div class="status-badge completed absolute top-4 left-4 z-10">
+                              <span class="status-indicator"></span>
+                              <span x-text="t.projects.statusCompleted"></span>
+                            </div>
+                            <span class="info-btn px-5 py-2.5 rounded-full text-sm text-gray-900" x-text="t.projects.info"></span>
+                            <div class="overflow-hidden">
+                              <img src="fotky web sadek/1B.jpg"
+                                   alt="Zahrada s trávníkem a ohništěm"
+                                   class="w-full h-72 lg:h-80 object-cover">
+                            </div>
+                          </div>
+                          <div class="p-6 md:p-8 project-content">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2" x-text="t.garden.title"></h3>
+                            <p class="text-sm text-gray-600" x-text="t.garden.preview"></p>
+                          </div>
+                        </a>
+                      </div>
                     </div>
-                    <img src="fotky web sadek/1B.jpg" alt="Zahrada s trávníkem a ohništěm" class="garden-editorial-image">
-                  </article>
-
-                  <article class="garden-gallery-block reveal">
-                    <h3 class="garden-heading mb-5">Realizace v obrazech</h3>
-                    <div class="garden-rule mb-7"></div>
-                    <div class="garden-gallery-grid">
-                      <img src="fotky web sadek/1A.JPG" alt="Realizace zahrady 1A">
-                      <img src="fotky web sadek/1B.jpg" alt="Realizace zahrady 1B">
-                      <img src="fotky web sadek/11.JPG" alt="Zahradní cesta">
-                      <img src="fotky web sadek/12.jpg" alt="Zahradní výsadba">
-                      <img src="fotky web sadek/13.JPG" alt="Zahradní detail">
-                    </div>
-                    <p class="garden-gallery-caption">Každá zahrada je jedinečná. Podívejte se na příklady z naší realizace, které ukazují, jak může vypadat zahrada inspirovaná japonským stylem v různých ročních obdobích a z různých úhlů pohledu.</p>
-                  </article>
-
-                  <article class="garden-editorial-row grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
-                    <div class="garden-copy lg:pr-8">
-                      <h3 class="garden-heading" x-text="t.garden.heading2"></h3>
-                      <div class="garden-rule my-5"></div>
-                      <p x-text="t.garden.paragraph2"></p>
-                    </div>
-                    <img src="fotky web sadek/15.JPG" alt="Přírodní materiály v zahradě" class="garden-editorial-image">
-                  </article>
-                </div>
-
-                <div class="garden-technical relative">
-                  <img src="fotky web sadek/13.JPG" alt="Cesta a výsadba v zahradě" class="absolute inset-0 w-full h-full object-cover">
-                  <div class="absolute inset-0 bg-sky-100/45"></div>
-                  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 flex justify-end">
-                    <article class="garden-technical-card max-w-xl reveal">
-                      <h3 class="garden-heading" x-text="t.garden.heading3"></h3>
-                      <div class="garden-rule my-5"></div>
-                      <p x-text="t.garden.paragraph3"></p>
-                    </article>
                   </div>
                 </div>
               </section>
@@ -935,6 +910,7 @@
                 },
                 garden: {
                     title: 'ZAHRADY',
+                    preview: 'Návrhy a realizace zahrad inspirovaných japonským stylem.',
                     heading1: 'Zahrada jako místo pro klid a inspiraci',
                     heading2: 'Promyšlené detaily a přírodní materiály',
                     heading3: 'Technické zázemí a řešení na míru',
@@ -980,6 +956,7 @@
                 },
                 garden: {
                     title: 'GARDENS',
+                    preview: 'Design and realization of Japanese-inspired gardens.',
                     heading1: 'A garden as a place to slow down and recharge',
                     heading2: 'Thoughtful details and natural materials',
                     heading3: 'Technical infrastructure and tailored solutions',
